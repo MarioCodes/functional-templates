@@ -1,0 +1,165 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.msanchez.templates.complete</groupId>
+  <artifactId>complete-template</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>complete-template</name>
+
+  <properties>
+	<!-- Java language level -->
+	<maven.compiler.config.version>1.8</maven.compiler.config.version>
+
+	<!-- General -->
+	<main.class>io.vertx.core.Starter</main.class> <!-- Do not change if Vertx -->
+	<main.verticle>es.msanchez.templates.complete.starter.StarterVerticle</main.verticle> <!-- Override in local POM -->
+
+	<!-- Normal Dependency Versions -->
+	<vertx.version>3.5.0</vertx.version>
+	<lombok.version>1.16.18</lombok.version>
+	<slf4j.version>1.7.25</slf4j.version>
+	<logback.version>1.2.3</logback.version>
+	<spring.version>5.0.2.RELEASE</spring.version>
+	<spring.data.version>2.0.2.RELEASE</spring.data.version>
+
+	<!-- Test Dependency Versions -->
+	<junit.version>4.12</junit.version>
+	<mockito.version>2.12.0</mockito.version>
+	<assertj.version>3.8.0</assertj.version>
+	  <codearte.catchexception.version>1.4.4</codearte.catchexception.version>
+
+	<!-- Maven Plugin Versions -->
+	<maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
+	<maven.shade.version>2.3</maven.shade.version>
+  </properties>
+
+  	<dependencies>
+  		<!-- Vertx -->
+		<dependency>
+		    <groupId>io.vertx</groupId>
+		    <artifactId>vertx-core</artifactId>
+		    <version>${vertx.version}</version>
+		</dependency>
+
+		<!-- Vertx Hazelcast. It administrates vertx' clusters -->
+		<dependency>
+		    <groupId>io.vertx</groupId>
+		    <artifactId>vertx-hazelcast</artifactId>
+		    <version>${vertx.version}</version>
+		</dependency>
+
+		<!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+    	<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>${spring.data.version}</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>${logback.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>${logback.version}</version>
+		</dependency>
+
+
+		<!-- Other dependencies -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>${lombok.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+
+		<!-- Test Dependencies -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>${junit.version}</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-core</artifactId>
+		    <version>${mockito.version}</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.assertj</groupId>
+		    <artifactId>assertj-core</artifactId>
+		    <version>${assertj.version}</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>eu.codearte.catch-exception</groupId>
+			<artifactId>catch-exception</artifactId>
+			<version>${codearte.catchexception.version}</version>
+		</dependency>
+
+	</dependencies>
+  
+	<build>
+  		<plugins>
+		  <!-- Sets the compiler version -->
+		  <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <version>${maven.compiler.plugin.version}</version>
+	        <configuration>
+	          <source>${maven.compiler.config.version}</source>
+	          <target>${maven.compiler.config.version}</target>
+	        </configuration>
+	      </plugin>
+
+	    	<!-- Fat Jar -->
+		    <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-shade-plugin</artifactId>
+			  <version>${maven.shade.version}</version>
+			  <executions>
+			    <execution>
+			      <phase>package</phase>
+			      <goals>
+			        <goal>shade</goal>
+			      </goals>
+			      <configuration>
+			        <transformers>
+			          <transformer
+			            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+			            <manifestEntries>
+			              <Main-Class>${main.class}</Main-Class> <!-- Comes with Vertx. Do not touch -->
+			              <Main-Verticle>${main.verticle}</Main-Verticle>
+			            </manifestEntries>
+			          </transformer>
+			        </transformers>
+			        <artifactSet/>
+			        <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
