@@ -11,7 +11,7 @@
 
 	<!-- General -->
 	<main.class>io.vertx.core.Starter</main.class> <!-- Do not change if Vertx -->
-	<main.verticle>es.msanchez.templates.complete.starter.StarterVerticle</main.verticle> <!-- Override in local POM -->
+	<main.verticle>es.msanchez.templates.java.full.starter.StarterVerticle</main.verticle> <!-- Override in local POM -->
 
 	<!-- Normal Dependency Versions -->
 	<vertx.version>3.7.0</vertx.version>

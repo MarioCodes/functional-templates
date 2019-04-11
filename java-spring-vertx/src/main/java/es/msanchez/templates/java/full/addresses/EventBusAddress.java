@@ -1,4 +1,4 @@
-package es.msanchez.templates.complete.addresses;
+package es.msanchez.templates.java.full.addresses;
 
 import lombok.AllArgsConstructor;
 

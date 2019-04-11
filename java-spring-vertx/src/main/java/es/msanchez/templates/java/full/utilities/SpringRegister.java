@@ -1,4 +1,4 @@
-package es.msanchez.templates.complete.utilities;
+package es.msanchez.templates.java.full.utilities;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

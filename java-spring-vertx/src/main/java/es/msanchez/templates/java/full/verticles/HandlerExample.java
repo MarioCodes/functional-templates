@@ -1,6 +1,6 @@
-package es.msanchez.templates.complete.verticles;
+package es.msanchez.templates.java.full.verticles;
 
-import es.msanchez.templates.complete.addresses.EventBusAddress;
+import es.msanchez.templates.java.full.addresses.EventBusAddress;
 import io.vertx.core.eventbus.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
