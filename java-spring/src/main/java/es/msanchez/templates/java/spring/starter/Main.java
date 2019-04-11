@@ -1,7 +1,7 @@
-package es.msanchez.templates.spring.starter;
+package es.msanchez.templates.java.spring.starter;
 
-import es.msanchez.templates.spring.config.SpringConfig;
-import es.msanchez.templates.spring.utilities.SpringRegister;
+import es.msanchez.templates.java.spring.config.SpringConfig;
+import es.msanchez.templates.java.spring.utilities.SpringRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

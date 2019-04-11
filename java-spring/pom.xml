@@ -10,7 +10,7 @@
 	<java.compiler.version>1.8</java.compiler.version>
 
 	<!-- General -->
-	<main.class>es.msanchez.templates.spring.starter.Main</main.class> <!-- Override in local POM -->
+	<main.class>es.msanchez.templates.java.spring.starter.Main</main.class> <!-- Override in local POM -->
 
 	<!-- Normal Dependency Versions -->
 	  <spring.version>5.1.6.RELEASE</spring.version>

@@ -1,4 +1,4 @@
-package es.msanchez.templates.spring.starter;
+package es.msanchez.templates.java.spring.starter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
