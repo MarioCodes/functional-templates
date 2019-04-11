@@ -1,4 +1,4 @@
-package es.msanchez.frameworks.spring.boot;
+package es.msanchez.frameworks.java.spring.boot;
 
 import java.util.Arrays;
 import java.util.List;
