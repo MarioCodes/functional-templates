@@ -1,29 +1,14 @@
-Configurated templates to start a project directly out of the box.  
-All of them contain all the common Frameworks that I use to develop. The difference resides in the big Frameworks which modify the project's structure.  
+Configurated templates to start a project directly out of the box. All of them contain all common Frameworks that I use to develop. The difference resides at big Frameworks such as Spring or Vertx, which modify the main structure's usage.
 
-#### Template Complete
-##### Frameworks 
-* Maven
-* Spring
-* Vertx
-
-##### How-to start
+## How-to start
+### Vertx template
 ```  
 mvn clean install  
 java -jar [name]-fat.jar -cluster
 ```  
 
-#### Template Springboot
-##### How-to start
+### Rest of them
 ```  
 mvn clean install
 java -jar [name].jar  
 ```
-
-#### Common Frameworks
-* Slf4j with Logback  
-* Lombok  
-* JUnit
-* Mockito
-* AssertJ
-* BDDCatchException
