@@ -9,25 +9,29 @@
 
     <properties>
         <!-- java language version -->
-        <maven-compiler-config.version>1.8</maven-compiler-config.version>
+        <java.compiler.version>1.8</java.compiler.version>
 
         <!-- maven plugins -->
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-shade.version>3.1.0</maven-shade.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.shade.version>3.2.1</maven.shade.version>
 
-        <!-- normal dependencies -->
+        <!-- Normal Dependency Versions -->
+        <spring.version>5.1.6.RELEASE</spring.version>
+        <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
+
+        <lombok.version>1.18.6</lombok.version>
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
-        <spring.version>5.0.8.RELEASE</spring.version>
-        <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
-        <lombok.version>1.16.20</lombok.version>
+        <google.guava.version>27.1-jre</google.guava.version>
+        <apache.commons.collections.version>4.3</apache.commons.collections.version>
 
-        <!-- test dependencies -->
-        <assertj.version>3.9.0</assertj.version>
-        <mockito.version>2.13.0</mockito.version>
-        <powermock.version>1.7.3</powermock.version>
-        <catch-exception.version>1.4.6</catch-exception.version>
+        <!-- Test Dependency Versions -->
         <junit.version>4.12</junit.version>
+        <testng.version>6.14.3</testng.version>
+        <mockito.version>2.26.0</mockito.version>
+        <assertj.version>3.12.2</assertj.version>
+        <codearte.catchexception.version>1.4.6</codearte.catchexception.version>
+
     </properties>
 
     <dependencies>
@@ -56,6 +60,18 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google.guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${apache.commons.collections.version}</version>
         </dependency>
 
         <!-- Spring Boot -->
@@ -102,7 +118,7 @@
         <dependency>
             <groupId>eu.codearte.catch-exception</groupId>
             <artifactId>catch-exception</artifactId>
-            <version>${catch-exception.version}</version>
+            <version>${codearte.catchexception.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -110,6 +126,13 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -150,10 +173,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven-compiler-config.version}</source>
-                    <target>${maven-compiler-config.version}</target>
+                    <source>${java.compiler.version}</source>
+                    <target>${java.compiler.version}</target>
                 </configuration>
             </plugin>
         </plugins>
