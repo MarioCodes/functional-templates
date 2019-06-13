@@ -14,12 +14,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HelloControllerTest {
+public class JavaRestControllerTest {
 
   private MockMvc mvcMock;
 
   @InjectMocks
-  private HelloController controller;
+  private JavaRestController controller;
 
   @Before
   public void setUp() {
