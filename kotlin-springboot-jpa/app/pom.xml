@@ -16,6 +16,12 @@
     <!-- kotlin dependencies -->
     <kotlin.jackson.version>2.9.8</kotlin.jackson.version>
 
+    <!-- persistence dependencies -->
+    <hibernate.core.version>5.4.3.Final</hibernate.core.version>
+    <hibernate.mysql.connector>8.0.16</hibernate.mysql.connector>
+    <spring-data-jpa.version>2.1.8.RELEASE</spring-data-jpa.version>
+    <datasource-hikari.version>3.3.1</datasource-hikari.version>
+
     <!-- Normal Dependency Versions -->
     <spring.version>5.1.6.RELEASE</spring.version>
     <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
@@ -36,6 +42,7 @@
   </properties>
 
   <dependencies>
+
     <!-- Kotlin -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
@@ -47,6 +54,33 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
       <version>${kotlin.jackson.version}</version>
+    </dependency>
+
+    <!-- Hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.core.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${hibernate.mysql.connector}</version>
+    </dependency>
+
+    <!-- JDBC Connection pool manager -->
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>${datasource-hikari.version}</version>
+    </dependency>
+
+    <!-- Spring Data JPA -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring-data-jpa.version}</version>
     </dependency>
 
     <!-- Spring Boot -->
@@ -147,21 +181,6 @@
       <groupId>eu.codearte.catch-exception</groupId>
       <artifactId>catch-exception</artifactId>
       <version>${codearte.catchexception.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- Spring test -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>${spring-boot.version}</version>
       <scope>test</scope>
     </dependency>
 
