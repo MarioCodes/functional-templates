@@ -5,7 +5,7 @@ target/
 *.classpath
 bin/
 */**/.idea
-
+*/**/database/data
 *.iml
 
 vertx/vertx-eventbus/multilanguage/vertx-eventbus-multilanguage-consumer/\.vertx/debug-js/vertx-js/
