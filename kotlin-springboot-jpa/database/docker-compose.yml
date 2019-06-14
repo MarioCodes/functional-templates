@@ -1,0 +1,18 @@
+version: '3.6'
+services:
+  hibernate-mysql:
+    image: mysql:8.0.16
+    container_name: hibernate.mysql
+    command: mysqld --user=root --verbose
+    volumes:
+       - ./data/mysql:/var/lib/mysql
+  #    - ./dbcreation.sql:/tmp/dbcreation.sql
+  #    - ./import.sh:/tmp/import.sh
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_DATABASE: "hibernate"
+      MYSQL_USER: "hibernate_user"
+      MYSQL_PASSWORD: "hibernate_pass"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"   
