@@ -1,7 +1,7 @@
 Configurated templates ready to clone and start a project directly out of the box. All of them are built through Maven.  
 
 There're 2 big groups:  
-* `java-kotlin` they support both Java and Kotlin code at the same time.
+* `kotlin` they support both Java and Kotlin code at the same time. This is to learn Kotlin in a comfortable environment, knowing I can just switch language at any moment.
 * `java` they only support Java code.
 
 ### How to compile & launch
