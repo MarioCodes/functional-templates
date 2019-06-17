@@ -27,8 +27,7 @@
     <apache.commons.collections.version>4.3</apache.commons.collections.version>
 
     <!-- Test Dependency Versions -->
-    <junit.version>4.12</junit.version>
-    <testng.version>6.14.3</testng.version>
+    <junit.version>5.4.2</junit.version>
     <mockito.version>2.26.0</mockito.version>
     <assertj.version>3.12.2</assertj.version>
     <codearte.catchexception.version>1.4.6</codearte.catchexception.version>
@@ -116,16 +115,16 @@
 
     <!-- Test Dependencies -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>${testng.version}</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -163,6 +162,12 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <version>${spring-boot.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
   </dependencies>
