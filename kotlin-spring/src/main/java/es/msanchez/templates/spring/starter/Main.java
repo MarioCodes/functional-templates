@@ -10,24 +10,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @Slf4j
 public class Main {
 
-  public static void main(String[] args) {
-    log.info("Application started");
-    final AnnotationConfigApplicationContext context = prepareSpring();
-    log.info("Configuration is ready");
+    public static void main(final String[] args) {
+        log.info("Application started");
+        final AnnotationConfigApplicationContext context = prepareSpring();
+        log.info("Configuration is ready");
 
-    final JavaBean javaBean = context.getBean(JavaBean.class);
-    log.info(javaBean.toString());
+        final JavaBean javaBean = context.getBean(JavaBean.class);
+        log.info(javaBean.toString());
 
-    final KotlinBean kotlinBean = context.getBean(KotlinBean.class);
-    log.info(kotlinBean.toString());
+        final KotlinBean kotlinBean = context.getBean(KotlinBean.class);
+        log.info(kotlinBean.toString());
 
-    log.info("Application is done");
-  }
+        log.info("Application is done");
+    }
 
-  private static AnnotationConfigApplicationContext prepareSpring() {
-    final SpringRegister register = new SpringRegister();
-
-    return register.initSpringApplicationContext(SpringConfig.class);
-  }
+    private static AnnotationConfigApplicationContext prepareSpring() {
+        final SpringRegister register = new SpringRegister();
+        return register.initSpringApplicationContext(SpringConfig.class);
+    }
 
 }
