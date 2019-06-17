@@ -1,4 +1,4 @@
-package es.msanchez.frameworks.spring.boot.controller
+package es.msanchez.frameworks.spring.boot.rest
 
 import es.msanchez.frameworks.spring.boot.validator.KotlinValidator
 import org.junit.jupiter.api.Test

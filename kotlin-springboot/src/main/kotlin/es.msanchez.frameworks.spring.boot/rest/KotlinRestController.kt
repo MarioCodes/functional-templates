@@ -1,12 +1,12 @@
-package es.msanchez.frameworks.spring.boot.controller
+package es.msanchez.frameworks.spring.boot.rest
 
 import es.msanchez.frameworks.spring.boot.validator.KotlinValidator
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RestController("/kotlin")
+@RestController
+@RequestMapping("/kotlin")
 class KotlinRestController(private val kotlinValidator: KotlinValidator) {
 
     @GetMapping
