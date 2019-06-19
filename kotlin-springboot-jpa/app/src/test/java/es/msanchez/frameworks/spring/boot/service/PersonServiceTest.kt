@@ -2,25 +2,31 @@ package es.msanchez.frameworks.spring.boot.service
 
 import es.msanchez.frameworks.spring.boot.dao.PersonDao
 import es.msanchez.frameworks.spring.boot.entity.Person
+import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
+import io.mockk.verify
 import org.assertj.core.api.BDDAssertions
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito
-import org.mockito.Mockito
+import org.junit.jupiter.api.extension.ExtendWith
 import java.util.*
 
+@ExtendWith(MockKExtension::class)
 internal class PersonServiceTest {
 
-    private val dao = Mockito.mock(PersonDao::class.java)
+    @MockK
+    lateinit var dao: PersonDao
 
-    private val service = PersonService(this.dao)
+    @InjectMockKs
+    lateinit var service: PersonService
 
     @Test
     internal fun testIsValidCaseDoesntExist() {
         // Given
         val name = "mario"
 
-        BDDMockito.given(this.dao.findOneByName(name))
-                .willReturn(Optional.empty())
+        every { dao.findOneByName(name) } returns Optional.empty()
 
         // When
         val result = this.service.isValid(name)
@@ -34,8 +40,7 @@ internal class PersonServiceTest {
         // Given
         val name = "mario"
 
-        BDDMockito.given(this.dao.findOneByName(name))
-                .willReturn(Optional.of(Person()))
+        every { dao.findOneByName(name) } returns Optional.of(Person())
 
         // When
         val result = this.service.isValid(name)
@@ -49,10 +54,13 @@ internal class PersonServiceTest {
         // Given
         val person = Person()
 
+        every { dao.save(person) } returns null
+
         // When
         this.service.save(person)
 
         // Then
-        BDDMockito.verify(this.dao).save(person)
+        verify { dao.save(person) }
     }
+
 }

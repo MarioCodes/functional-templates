@@ -34,7 +34,7 @@
 
     <!-- Test Dependency Versions -->
     <junit.version>5.4.2</junit.version>
-    <mockito.version>2.26.0</mockito.version>
+    <mockk.version>1.9.3</mockk.version>
     <assertj.version>3.12.2</assertj.version>
     <codearte.catchexception.version>1.4.6</codearte.catchexception.version>
 
@@ -163,9 +163,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito.version}</version>
+      <groupId>io.mockk</groupId>
+      <artifactId>mockk</artifactId>
+      <version>${mockk.version}</version>
       <scope>test</scope>
     </dependency>
 
