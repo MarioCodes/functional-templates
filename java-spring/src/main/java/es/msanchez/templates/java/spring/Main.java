@@ -1,6 +1,7 @@
-package es.msanchez.templates.java.spring.starter;
+package es.msanchez.templates.java.spring;
 
 import es.msanchez.templates.java.spring.config.SpringConfig;
+import es.msanchez.templates.java.spring.entity.Person;
 import es.msanchez.templates.java.spring.utilities.SpringRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -13,7 +14,7 @@ public class Main {
         final AnnotationConfigApplicationContext context = prepareSpring();
         log.info("Configuration is ready");
 
-        final DummyBean bean = context.getBean(DummyBean.class);
+        final Person person = context.getBean(Person.class);
 
         log.info("Application is done");
     }

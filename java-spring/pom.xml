@@ -7,7 +7,7 @@
 
   <properties>
     <!-- Project Specific -->
-    <main.class>es.msanchez.templates.java.spring.starter.Main</main.class><!-- Override in local POM -->
+    <main.class>es.msanchez.templates.java.spring.Main</main.class><!-- Override in local POM -->
 
     <!-- General -->
     <java.compiler.version>1.8</java.compiler.version>
