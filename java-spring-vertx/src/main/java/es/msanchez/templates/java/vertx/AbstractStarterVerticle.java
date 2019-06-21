@@ -15,32 +15,34 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @Getter
 public abstract class AbstractStarterVerticle extends AbstractVerticle {
 
-  @Setter private AnnotationConfigApplicationContext applicationContext;
+    @Setter
+    private AnnotationConfigApplicationContext applicationContext;
 
-  private SpringRegister register = new SpringRegister();
+    private SpringRegister register = new SpringRegister();
 
-  /**
-   * Way to deploy a standard Verticle once from {@link StarterVerticle}, giving only the class to deploy.
-   *
-   * @param clazz Class which extends from Verticle, that we want to deploy once.
-   */
-  protected void deployVerticle(final Class<? extends Verticle> clazz) {
-    final DeploymentOptions options = new DeploymentOptions();
-    final Verticle verticle = applicationContext.getBean(clazz);
-    final Vertx vertx = applicationContext.getBean(Vertx.class);
-    vertx.deployVerticle(verticle, options, result -> {
-      if (result.succeeded())
-        log.info("Deployment succeded!");
-      else
-        log.error("Error on deployment verticle: ", result.cause());
-    });
-  }
+    /**
+     * Way to deploy a standard Verticle once from {@link StarterVerticle}, giving only the class to deploy.
+     *
+     * @param clazz Class which extends from Verticle, that we want to deploy once.
+     */
+    protected void deployVerticle(final Class<? extends Verticle> clazz) {
+        final DeploymentOptions options = new DeploymentOptions();
+        final Verticle verticle = this.applicationContext.getBean(clazz);
+        final Vertx vertx = this.applicationContext.getBean(Vertx.class);
+        vertx.deployVerticle(verticle, options, result -> {
+            if (result.succeeded())
+                log.info("Deployment succeded!");
+            else
+                log.error("Error on deployment verticle: ", result.cause());
+        });
+    }
 
-  @Override public void start() {
-    applicationContext = register.initSpringApplicationContext(SpringConfig.class);
-    startVerticleInstances();
-  }
+    @Override
+    public void start() {
+        this.applicationContext = this.register.initSpringApplicationContext(SpringConfig.class);
+        this.startVerticleInstances();
+    }
 
-  protected abstract void startVerticleInstances();
+    protected abstract void startVerticleInstances();
 
 }

@@ -9,12 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class HandlerExample extends AbstractVerticleHandler<String> {
 
-  @Override protected String handleMessageBody(final Message<String> event) {
-    log.info(String.format("FinalHandler called with parameter: %s", event.body()));
-    return null;
-  }
+    @Override
+    protected String handleMessageBody(final Message<String> event) {
+        log.info(String.format("FinalHandler called with parameter: %s", event.body()));
+        return null;
+    }
 
-  @Override protected EventBusAddress eventBusAddress() {
-    return EventBusAddress.MESSAGE_ADDRESS;
-  }
+    @Override
+    protected EventBusAddress eventBusAddress() {
+        return EventBusAddress.MESSAGE_ADDRESS;
+    }
 }
