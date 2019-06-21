@@ -1,4 +1,4 @@
-package es.msanchez.frameworks.java.spring.boot.exception;
+package es.msanchez.templates.java.springboot.jpa.exception;
 
 public class DataTransferException extends RuntimeException {
 

@@ -1,9 +1,9 @@
-package es.msanchez.frameworks.java.spring.boot.rest;
+package es.msanchez.templates.java.springboot.jpa.rest;
 
 import com.googlecode.catchexception.apis.BDDCatchException;
-import es.msanchez.frameworks.java.spring.boot.entity.Person;
-import es.msanchez.frameworks.java.spring.boot.exception.DataTransferException;
-import es.msanchez.frameworks.java.spring.boot.service.PersonService;
+import es.msanchez.templates.java.springboot.jpa.entity.Person;
+import es.msanchez.templates.java.springboot.jpa.exception.DataTransferException;
+import es.msanchez.templates.java.springboot.jpa.service.PersonService;
 import org.assertj.core.api.BDDAssertions;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;

@@ -1,7 +1,7 @@
-package es.msanchez.frameworks.java.spring.boot.service;
+package es.msanchez.templates.java.springboot.jpa.service;
 
-import es.msanchez.frameworks.java.spring.boot.dao.PersonDao;
-import es.msanchez.frameworks.java.spring.boot.entity.Person;
+import es.msanchez.templates.java.springboot.jpa.dao.PersonDao;
+import es.msanchez.templates.java.springboot.jpa.entity.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

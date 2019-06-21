@@ -1,8 +1,8 @@
-package es.msanchez.frameworks.java.spring.boot.rest;
+package es.msanchez.templates.java.springboot.jpa.rest;
 
-import es.msanchez.frameworks.java.spring.boot.entity.Person;
-import es.msanchez.frameworks.java.spring.boot.exception.DataTransferException;
-import es.msanchez.frameworks.java.spring.boot.service.PersonService;
+import es.msanchez.templates.java.springboot.jpa.entity.Person;
+import es.msanchez.templates.java.springboot.jpa.exception.DataTransferException;
+import es.msanchez.templates.java.springboot.jpa.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

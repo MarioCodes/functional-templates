@@ -1,4 +1,4 @@
-package es.msanchez.frameworks.java.spring.boot.config;
+package es.msanchez.templates.java.springboot.jpa.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"es.msanchez.frameworks.java.spring.boot.dao"})
+@EnableJpaRepositories(basePackages = {"es.msanchez.templates.java.springboot.jpa.dao"})
 public class DatabaseConfig {
 
     @Bean
@@ -36,7 +36,7 @@ public class DatabaseConfig {
         final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("es.msanchez.frameworks.java.spring.boot.**");
+        entityManagerFactoryBean.setPackagesToScan("es.msanchez.templates.java.springboot.**");
 
         final Properties jpaProperties = new Properties();
 

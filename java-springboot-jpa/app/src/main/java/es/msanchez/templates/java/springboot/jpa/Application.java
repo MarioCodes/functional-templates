@@ -1,4 +1,4 @@
-package es.msanchez.frameworks.java.spring.boot;
+package es.msanchez.templates.java.springboot.jpa;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

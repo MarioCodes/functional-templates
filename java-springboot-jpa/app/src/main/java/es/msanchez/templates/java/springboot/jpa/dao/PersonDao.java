@@ -1,6 +1,6 @@
-package es.msanchez.frameworks.java.spring.boot.dao;
+package es.msanchez.templates.java.springboot.jpa.dao;
 
-import es.msanchez.frameworks.java.spring.boot.entity.Person;
+import es.msanchez.templates.java.springboot.jpa.entity.Person;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
