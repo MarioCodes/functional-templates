@@ -1,4 +1,4 @@
-package es.msanchez.templates.java.full.config;
+package es.msanchez.templates.java.vertx.config;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;

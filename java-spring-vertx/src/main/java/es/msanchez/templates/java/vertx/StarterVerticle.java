@@ -1,6 +1,6 @@
-package es.msanchez.templates.java.full.starter;
+package es.msanchez.templates.java.vertx;
 
-import es.msanchez.templates.java.full.verticles.HandlerExample;
+import es.msanchez.templates.java.vertx.verticles.HandlerExample;
 import io.vertx.core.Future;
 import lombok.extern.slf4j.Slf4j;
 

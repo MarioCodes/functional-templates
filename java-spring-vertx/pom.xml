@@ -8,7 +8,7 @@
   <properties>
     <!-- Project Specific -->
     <main.class>io.vertx.core.Starter</main.class> <!-- Do not change for a Vertx project! -->
-    <main.verticle>es.msanchez.templates.java.full.starter.StarterVerticle</main.verticle> <!-- Override in local POM -->
+    <main.verticle>es.msanchez.templates.java.vertx.StarterVerticle</main.verticle> <!-- Override in local POM -->
 
     <!-- General -->
     <java.compiler.version>1.8</java.compiler.version>

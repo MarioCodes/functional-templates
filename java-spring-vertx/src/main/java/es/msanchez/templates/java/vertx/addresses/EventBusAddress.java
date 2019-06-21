@@ -1,4 +1,4 @@
-package es.msanchez.templates.java.full.addresses;
+package es.msanchez.templates.java.vertx.addresses;
 
 import lombok.AllArgsConstructor;
 

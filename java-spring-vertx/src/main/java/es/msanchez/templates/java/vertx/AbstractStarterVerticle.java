@@ -1,7 +1,7 @@
-package es.msanchez.templates.java.full.starter;
+package es.msanchez.templates.java.vertx;
 
-import es.msanchez.templates.java.full.config.SpringConfig;
-import es.msanchez.templates.java.full.utilities.SpringRegister;
+import es.msanchez.templates.java.vertx.config.SpringConfig;
+import es.msanchez.templates.java.vertx.utilities.SpringRegister;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Verticle;
