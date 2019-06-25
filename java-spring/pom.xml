@@ -8,6 +8,8 @@
   <properties>
     <!-- Project Specific -->
     <main.class>es.msanchez.templates.java.spring.Main</main.class><!-- Override in local POM -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- General -->
     <java.compiler.version>1.8</java.compiler.version>

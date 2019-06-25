@@ -9,6 +9,8 @@
     <!-- Project Specific -->
     <main.class>io.vertx.core.Starter</main.class> <!-- Do not change for a Vertx project! -->
     <main.verticle>es.msanchez.templates.java.vertx.StarterVerticle</main.verticle> <!-- Override in local POM -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- General -->
     <java.compiler.version>1.8</java.compiler.version>

@@ -8,6 +8,8 @@
   <properties>
     <!-- General -->
     <java.compiler.version>1.8</java.compiler.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- maven plugins -->
     <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
