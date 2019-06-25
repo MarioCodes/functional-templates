@@ -10,7 +10,7 @@
   	<kotlin.version>1.3.21</kotlin.version>
 
 	<!-- General -->
-	<main.class>es.msanchez.templates.spring.starter.Main</main.class> <!-- Override in local POM -->
+	<main.class>es.msanchez.templates.spring.Main</main.class> <!-- Override in local POM -->
 
 	<!-- kotlin dependencies -->
 	<kotlin.jackson.version>2.9.8</kotlin.jackson.version>

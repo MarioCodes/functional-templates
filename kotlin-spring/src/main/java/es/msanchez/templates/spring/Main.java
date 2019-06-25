@@ -1,4 +1,4 @@
-package es.msanchez.templates.spring.starter;
+package es.msanchez.templates.spring;
 
 import es.msanchez.templates.spring.beans.JavaBean;
 import es.msanchez.templates.spring.beans.KotlinBean;
