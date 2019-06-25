@@ -3,7 +3,9 @@ package es.msanchez.templates.java.spring.builder.generic;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Slf4j
@@ -58,10 +60,14 @@ class Randomizer<TYPE> extends RandomsImpl {
             random = this.randomPositiveInteger();
         } else if (fieldName.contains("Boolean")) {
             random = this.randomBoolean();
-        } else if(fieldName.contains("Double")) {
+        } else if (fieldName.contains("Double")) {
             random = this.randomDouble();
-        } else if(fieldName.contains("Float")) {
+        } else if (fieldName.contains("Float")) {
             random = this.randomFloat();
+        } else if (fieldName.contains("List")) {
+            random = new ArrayList<>();
+        } else if (fieldName.contains("Set")) {
+            random = new HashSet<>();
         } else {
             log.error("Tried to fill the field type '{}' but it's not known", fieldName);
             throw new UnsupportedOperationException("Tried to automatically fill a field for a Builder, " +
