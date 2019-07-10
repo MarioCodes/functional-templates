@@ -1,4 +1,4 @@
-package es.msanchez.templates.java.spring.builder.generic;
+package es.msanchez.commons.java.builders;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package es.msanchez.templates.java.spring.builder.generic;
+package es.msanchez.commons.java.builders;
 
 import java.security.SecureRandom;
 import java.util.Random;

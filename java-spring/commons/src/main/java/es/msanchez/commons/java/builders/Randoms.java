@@ -1,4 +1,4 @@
-package es.msanchez.templates.java.spring.builder.generic;
+package es.msanchez.commons.java.builders;
 
 public interface Randoms {
 
