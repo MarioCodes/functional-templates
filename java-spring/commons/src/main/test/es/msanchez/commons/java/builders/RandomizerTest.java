@@ -1,6 +1,6 @@
 package es.msanchez.commons.java.builders;
 
-import es.msanchez.templates.java.spring.entity.Person;
+import lombok.Getter;
 import org.assertj.core.api.BDDAssertions;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -10,12 +10,23 @@ import java.util.List;
 
 public class RandomizerTest {
 
-    private Randomizer<Person> randomizer = new Randomizer<>();
+    @Getter
+    private class TestBean {
+        private Long longField;
+        private Integer integer;
+        private String string;
+        private Double doubleField;
+        private Float floatField;
+        private Boolean booleanField;
+    }
+
+
+    private Randomizer<TestBean> randomizer = new Randomizer<>();
 
     @Test
     public void testFillInstance() {
         // @GIVEN
-        final Person bean = new Person();
+        final TestBean bean = new TestBean();
 
         // @WHEN
         this.randomizer.fill(bean);
@@ -24,12 +35,12 @@ public class RandomizerTest {
         this.assertOne(bean);
     }
 
-    private void assertOne(final Person bean) {
+    private void assertOne(final TestBean bean) {
         BDDAssertions.assertThat(bean).isNotNull();
         SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(bean.getName()).hasSize(50);
-            soft.assertThat(bean.getAge()).isInstanceOf(Integer.class).isPositive();
-            soft.assertThat(bean.getId()).isInstanceOf(Long.class).isPositive();
+            soft.assertThat(bean.getString()).hasSize(50);
+            soft.assertThat(bean.getInteger()).isInstanceOf(Integer.class).isPositive();
+            soft.assertThat(bean.getLongField()).isInstanceOf(Long.class).isPositive();
             soft.assertThat(bean.getBooleanField()).isInstanceOf(Boolean.class);
             soft.assertThat(bean.getDoubleField()).isInstanceOf(Double.class).isPositive();
             soft.assertThat(bean.getFloatField()).isInstanceOf(Float.class).isPositive();
@@ -39,7 +50,7 @@ public class RandomizerTest {
     @Test
     public void testFillList() {
         // @GIVEN
-        final List<Person> list = this.prepareList();
+        final List<TestBean> list = this.prepareList();
 
         // @WHEN
         this.randomizer.fill(list);
@@ -48,10 +59,10 @@ public class RandomizerTest {
         list.forEach(this::assertOne);
     }
 
-    private List<Person> prepareList() {
-        final List<Person> list = new ArrayList<>();
+    private List<TestBean> prepareList() {
+        final List<TestBean> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            list.add(new Person());
+            list.add(new TestBean());
         }
         return list;
     }
