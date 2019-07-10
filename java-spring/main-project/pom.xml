@@ -36,6 +36,14 @@
   </properties>
 
   <dependencies>
+    <!-- my own modules -->
+    <dependency>
+      <groupId>es.msanchez.templates.java.spring</groupId>
+      <artifactId>commons</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
