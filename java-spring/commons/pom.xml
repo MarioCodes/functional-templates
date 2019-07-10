@@ -1,9 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>es.msanchez.templates.java.spring</groupId>
   <artifactId>commons</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>commons</name>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>es.msanchez.templates.java.spring</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
 
   <properties>
     <!-- Project Specific -->
@@ -12,7 +19,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- General -->
-    <java.compiler.version>11</java.compiler.version>
+    <java.compiler.version>8</java.compiler.version>
 
     <!-- Maven Plugin Versions -->
     <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
@@ -124,33 +131,6 @@
           <target>${java.compiler.version}</target>
         </configuration>
       </plugin>
-
-      <!-- Fat Jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>${maven.shade.version}</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <manifestEntries>
-                    <Main-Class>${main.class}</Main-Class>
-                  </manifestEntries>
-                </transformer>
-              </transformers>
-              <artifactSet/>
-              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
   </build>
 

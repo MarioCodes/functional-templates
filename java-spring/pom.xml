@@ -1,15 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>java-spring-template-main-project</artifactId>
+  <groupId>es.msanchez.templates.java.spring</groupId>
+  <artifactId>parent-pom</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>java-spring-template-main-project</name>
-
-  <parent>
-    <groupId>es.msanchez.templates.java.spring</groupId>
-    <artifactId>parent-pom</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../</relativePath>
-  </parent>
+  <name>java-spring-template-parent</name>
+  <packaging>pom</packaging>
 
   <properties>
     <!-- Project Specific -->
@@ -38,17 +33,14 @@
     <mockito.version>2.26.0</mockito.version>
     <assertj.version>3.12.2</assertj.version>
     <codearte.catchexception.version>1.4.6</codearte.catchexception.version>
-
   </properties>
 
+  <modules>
+    <module>main-project</module>
+    <module>commons</module>
+  </modules>
+
   <dependencies>
-      <!-- my own modules -->
-      <dependency>
-          <groupId>es.msanchez.templates.java.spring</groupId>
-          <artifactId>commons</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
 
     <!-- Spring -->
     <dependency>
@@ -138,33 +130,6 @@
           <target>${java.compiler.version}</target>
         </configuration>
       </plugin>
-
-      <!-- Fat Jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>${maven.shade.version}</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <manifestEntries>
-                    <Main-Class>${main.class}</Main-Class>
-                  </manifestEntries>
-                </transformer>
-              </transformers>
-              <artifactSet/>
-              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
   </build>
 
