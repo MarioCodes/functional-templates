@@ -1,6 +1,5 @@
 package es.msanchez.commons.java.builders;
 
-import lombok.Getter;
 import org.assertj.core.api.BDDAssertions;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -9,17 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomizerTest {
-
-    @Getter
-    private class TestBean {
-        private Long longField;
-        private Integer integer;
-        private String string;
-        private Double doubleField;
-        private Float floatField;
-        private Boolean booleanField;
-    }
-
 
     private Randomizer<TestBean> randomizer = new Randomizer<>();
 
