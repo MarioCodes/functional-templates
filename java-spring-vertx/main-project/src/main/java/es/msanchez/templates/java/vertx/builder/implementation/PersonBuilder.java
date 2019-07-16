@@ -1,6 +1,6 @@
 package es.msanchez.templates.java.vertx.builder.implementation;
 
-import es.msanchez.templates.java.vertx.builder.generic.AbstractBuilder;
+import es.msanchez.commons.java.builders.AbstractBuilder;
 import es.msanchez.templates.java.vertx.entity.Person;
 
 public class PersonBuilder extends AbstractBuilder<PersonBuilder, Person> {
