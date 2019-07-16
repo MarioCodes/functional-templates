@@ -1,6 +1,6 @@
 package es.msanchez.templates.java.springboot.jpa.builder.implementation;
 
-import es.msanchez.templates.java.springboot.jpa.builder.generic.AbstractBuilder;
+import es.msanchez.commons.java.builders.AbstractBuilder;
 import es.msanchez.templates.java.springboot.jpa.entity.Person;
 
 public class PersonBuilder extends AbstractBuilder<PersonBuilder, Person> {
