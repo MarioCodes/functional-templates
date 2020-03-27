@@ -1,0 +1,12 @@
+version: '3.7'
+services: 
+
+  my-python-app: 
+    build:
+      context: ./my-app
+      dockerfile: ./DockerFile
+    image: my-python-app
+    container_name: my-python-app
+    ports: 
+      - "4001:80"
+

@@ -1,0 +1,22 @@
+# Beware when upgrading the base image. Upgrading to >= 3.8.5 breaks my config and the new one does not compile. Jekyll does not build nor serve. I've already open an Issue on Github.
+FROM jekyll/jekyll:3.8.4
+
+# Disables host override for URLs when developing on localhost. There's a bug between 127.0.0.1 and 0.0.0.0 where it breaks the URLs and CSS / JS resources for the whole site. 
+ENV JEKYLL_ENV=production
+
+# Set all relative paths from now on to part from this one.
+WORKDIR /srv/jekyll
+
+# Documents the intention to export this port. For it to work, you have to start DockerFile with option -P or set it at docker-compose.yml
+EXPOSE 4000
+
+# Copy all the contents from the actual folder to the previously set relative path
+# 	--chown option is to fix a Jekyll's bug. When not set, jekyll cannot open / write the GemFile
+COPY --chown=jekyll:jekyll . .
+
+# Installs into the system, all specified Gems at GemFile
+RUN bundle install 
+
+# When everything's ready, execute this command
+ENTRYPOINT ["bundle", "exec", "jekyll", "serve"]
+CMD ["--host", "0.0.0.0"]

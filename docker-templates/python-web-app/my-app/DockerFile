@@ -1,0 +1,20 @@
+# Use an official Python runtime as a parent image
+FROM python:3.7.4-alpine3.10
+
+# Set the working directory to /app, to be able to use relative paths from now on from now on
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+ADD . .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org --no-cache-dir -r app/requirements.txt
+
+# Declare the intention to export port 80 to the world. Needed to map it on compose File.
+EXPOSE 80
+
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+ENTRYPOINT ["python", "app/app.py"]

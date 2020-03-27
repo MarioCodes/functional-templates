@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+
+  project-mysql:
+    image: mysql:8.0.18
+    container_name: project.mysql
+    command: mysqld --user=root --verbose
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "project"
+      MYSQL_USER: "project_user"
+      MYSQL_PASSWORD: "project_pass"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  project-mongo:
+    image: mongo:latest
+    container_name: project.mongo
+    command: mongod --smallfiles --logpath=/dev/null
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null

@@ -1,0 +1,15 @@
+##
+# Build Stage - This image won't be included in the release image. Only compiles.
+##
+FROM maven:3.6.1-jdk-8-alpine AS builder
+WORKDIR /usr/src/app
+ADD app .
+RUN mvn -f pom.xml clean package
+
+##
+# Package stage
+## 
+FROM openjdk:8u212-jre-alpine
+COPY --from=builder /usr/src/app/target/my-java-app-*-SNAPSHOT.jar /usr/src/myapp/my-java-app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/usr/src/myapp/my-java-app.jar"]

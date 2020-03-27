@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+        website: 
+                build:
+                        context: ./website
+                        dockerfile: ./DockerFile
+                image: personal-website:0.0.1
+                container_name: personal-website
+                ports:
+                       - 4000:4000
