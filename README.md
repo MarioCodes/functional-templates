@@ -1,27 +1,39 @@
-Configurated templates ready to clone and start a project directly out of the box. All of them are built through Maven.  
+Ready-to-code templates to start a project directly out of the box.
 
-There're 2 big groups:  
-* `kotlin` they support both Java and Kotlin code at the same time. This is to learn Kotlin in a comfortable environment, knowing I can just switch language at any moment.
-* `java` they only support Java code.
+## Compile & Run
+### Java & Kotlin
+They compile as a fat jar through maven.  
+Kotlin is first compiled to java code, and this to binaries. This way it's possible to write Java classes at Kotlin projects for ease of use.
 
-### How to compile & launch
-#### Spring(boot)
-They compile as a fat jar.
 ~~~ bash
 mvn clean install
 java -jar [name].jar  
 ~~~
 
-#### Vertx
+### Java Vertx
 They compile the same but the `-cluster` option is needed for `Hazelcast` and `Vertx` to search for another microservices on launch.
 ~~~ bash
 mvn clean install  
 java -jar [name]-fat.jar -cluster
 ~~~
 
-#### Spring data JPA with Database
-I included a `MySQL8` version as a `Docker` service. To run it, be sure to have `Docker` installed, go to the `/database` folder and run
-~~~ bash
-docker-compose up -d
-~~~
-After this just follow the same steps as for `Spring(boot)` to compile and launch.
+### Docker
+Everything that comes built through docker, comes with a Dockerfile and a docker-compose script so just `docker-compose up` at the script level to start the service.
+
+#### Java
+It uses a multi-stage image which builds upon a maven image and then deploys the resultant .jar into a Java image.
+
+#### Jekyll
+The build.sh script builds the image from docker-compose.yml and DockerFile, but does not start the container. This is useful to deploy into DockerHub when all changes are ready.
+
+development.sh script builds the image from cache and starts a container with --watch option. This is useful to write posts, as it will automatically reload all changes on .md files.
+
+#### mysql & mongodb
+Official images, without ini script. Initializes a blank database.
+
+### Others
+I'll try to put start scripts at the root folder for the rest of them.
+
+## Known issues
+* `docker-jekyll` --reload option doesn't work
+* `kotlin-spring` doesn't compile. All `kotlin-springboot` variants do though
