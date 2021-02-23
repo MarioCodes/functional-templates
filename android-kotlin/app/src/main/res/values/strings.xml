@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">MyTemplate</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Graph Fragment</string>
+
+    <!-- general -->
+    <string name="cancel_button">Cancel</string>
+
+    <!-- main fragment -->
+    <string name="add_entry">Add Entry</string>
+    <string name="remove_entry">Delete Entry</string>
+
+    <!-- add entry -->
+    <string name="add_entry_add_button">Save</string>
+
+    <!-- delete entry-->
+    <string name="entry_entry_title_placeholder">Value: </string>
+    <string name="entry_entry_content_placeholder">0.0kg</string>
+
+    <string name="entry_date_title_placeholder">Date: </string>
+    <string name="entry_date_content_placeholder">01/01/2021</string>
+
+    <string name="delete_entry">DELETE</string>
+
+
+    <!-- Titles and subtitles -->
+    <!-- fragment add entry -->
+    <string name="add_entry_title">Create a new entry</string>
+    <string name="add_entry_subtitle">Add Entry:</string>
+    <string name="add_second_entry_subtitle">Add value:</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+    <string name="danger_zone_header">DANGER ZONE</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <string name="prefs_reset_button_title">Delete local data</string>
+    <string name="prefs_reset_button_summary">This deletes all local data. This action is not reversible. </string>
+    <string name="prefs_reset_button_text">DELETE</string>
+
+    <string name="prefs_export_button_title">Export local data</string>
+    <string name="prefs_export_button_summary">This exports local data into a file.</string>
+    <string name="prefs_export_button_text">EXPORT</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>
