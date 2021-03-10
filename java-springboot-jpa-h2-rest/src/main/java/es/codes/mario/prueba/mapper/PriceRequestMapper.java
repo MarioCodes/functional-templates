@@ -6,6 +6,8 @@ import es.codes.mario.prueba.validator.PriceValidator;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -14,8 +16,8 @@ public class PriceRequestMapper {
     public PriceRequest map(final String date,
                             final Long brandId,
                             final Long productId) {
-        final LocalDateTime time = parseDate(date);
-        return createRequest(time, brandId, productId);
+        final ZonedDateTime zonedTime = parseDate(date);
+        return createRequest(zonedTime, brandId, productId);
     }
 
     /**
@@ -25,12 +27,14 @@ public class PriceRequestMapper {
      * @param date -
      * @return -
      */
-    private LocalDateTime parseDate(final String date) {
+    private ZonedDateTime parseDate(final String date) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.EXPECTED_FORMAT.getFormat());
-        return LocalDateTime.parse(date, formatter);
+        final LocalDateTime time = LocalDateTime.parse(date, formatter);
+        final ZoneId zone = ZoneId.of("Europe/London");
+        return ZonedDateTime.of(time, zone);
     }
 
-    private PriceRequest createRequest(final LocalDateTime date,
+    private PriceRequest createRequest(final ZonedDateTime date,
                                        final Long brandId,
                                        final Long productId) {
         final PriceRequest request = new PriceRequest();

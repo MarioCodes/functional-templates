@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * TODO
  *      - rename project folders -> project folders; log4j2; pom groupId; SpringConfig class;
- *      - implement usos horarios.
  *      - export POSTMAN collection.
  *      - delete examples
  *
@@ -21,6 +20,7 @@ import java.util.List;
  *      - never use Strings for money.
  *      - never use external code to the test.
  *      - never use subqueries, as it reduces performance.
+ *      - always use ZonedDateTime for time APIs.
  */
 @Slf4j
 @SpringBootApplication

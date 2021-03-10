@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PriceMapperTest {
@@ -37,8 +38,8 @@ public class PriceMapperTest {
     private Price buildPrice() {
         final Price price = new Price();
         price.setBrandId(123L);
-        price.setStartDate(LocalDateTime.of(1980, 12, 20, 12, 0));
-        price.setEndDate(LocalDateTime.of(1981, 2, 20, 14, 0));
+        price.setStartDate(ZonedDateTime.of(1980, 12, 20, 12, 0, 0, 0, ZoneId.of("Europe/London")));
+        price.setEndDate(ZonedDateTime.of(1981, 2, 20, 14, 0, 0, 0, ZoneId.of("Europe/London")));
         price.setPriceList(1L);
         price.setPrice("123.0");
         price.setCurrency("EUR");

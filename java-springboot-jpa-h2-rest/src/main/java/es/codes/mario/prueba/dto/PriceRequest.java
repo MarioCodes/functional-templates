@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
 public class PriceRequest implements Serializable {
 
-    private LocalDateTime applicationDate;
+    private ZonedDateTime applicationDate;
 
     private Long productId;
 

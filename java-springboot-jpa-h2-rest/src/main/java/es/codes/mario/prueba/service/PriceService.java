@@ -28,7 +28,7 @@ public class PriceService {
      * if no entry was found.
      */
     public PriceReducedDto retrievePrice(final PriceRequest request) {
-        final Optional<Price> optPrice = dao.findOneByLocalDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
+        final Optional<Price> optPrice = dao.findOneByZonedDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
                 request.getProductId(), request.getBrandId());
         final Price price = optPrice.orElseThrow(() -> this.log(request));
         return mapper.map(price);

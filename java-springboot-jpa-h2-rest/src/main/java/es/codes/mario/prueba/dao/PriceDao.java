@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 public interface PriceDao extends RawDao<Price> {
@@ -20,7 +20,7 @@ public interface PriceDao extends RawDao<Price> {
      * This is also cached to improve performance for large data sets.
      * </pre>
      *
-     * @param date      valid {@link LocalDateTime}
+     * @param date      valid {@link ZonedDateTime}
      * @param productId has to be positive.
      * @param brandId   has to be positive.
      * @return {@link Optional#empty()} if no matching data is found inside the database or {@link Price} if found.
@@ -30,7 +30,7 @@ public interface PriceDao extends RawDao<Price> {
             "AND p.priority = " +
             "(SELECT MAX(pp.priority) FROM Price pp WHERE pp.productId = :productId AND pp.brandId = :brandId AND :date BETWEEN pp.startDate AND pp.endDate)")
     @Cacheable(value = "prices")
-    Optional<Price> findOneByLocalDateTimeAndProductIdAndBrandId(@Param("date") final LocalDateTime date,
+    Optional<Price> findOneByZonedDateTimeAndProductIdAndBrandId(@Param("date") final ZonedDateTime date,
                                                                  @Param("productId") final Long productId,
                                                                  @Param("brandId") final Long brandId);
 

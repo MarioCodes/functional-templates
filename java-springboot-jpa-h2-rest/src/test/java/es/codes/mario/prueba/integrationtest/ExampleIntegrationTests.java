@@ -12,7 +12,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfig.class})
@@ -28,7 +29,7 @@ public class ExampleIntegrationTests {
     public void test1() {
         // given
         final String date = "2020-06-14 10:00:00";
-        final LocalDateTime dateAsTime = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
+        final ZonedDateTime dateAsTime = ZonedDateTime.of(2020, 6, 14, 10, 0, 0, 0, ZoneId.of("Europe/London"));
 
         final Long productId = 35455L;
         final Long brandId = 1L;
@@ -58,7 +59,7 @@ public class ExampleIntegrationTests {
     public void test2() {
         // given
         final String date = "2020-06-14 16:00:00";
-        final LocalDateTime dateAsTime = LocalDateTime.of(2020, 6, 14, 16, 0, 0);
+        final ZonedDateTime dateAsTime = ZonedDateTime.of(2020, 6, 14, 16, 0, 0, 0, ZoneId.of("Europe/London"));
 
         final Long productId = 35455L;
         final Long brandId = 1L;
@@ -88,7 +89,7 @@ public class ExampleIntegrationTests {
     public void test3() {
         // given
         final String date = "2020-06-14 21:00:00";
-        final LocalDateTime dateAsTime = LocalDateTime.of(2020, 6, 14, 21, 0, 0);
+        final ZonedDateTime dateAsTime = ZonedDateTime.of(2020, 6, 14, 21, 0, 0, 0, ZoneId.of("Europe/London"));
 
         final Long productId = 35455L;
         final Long brandId = 1L;
@@ -118,7 +119,7 @@ public class ExampleIntegrationTests {
     public void test4() {
         // given
         final String date = "2020-06-15 10:00:00";
-        final LocalDateTime dateAsTime = LocalDateTime.of(2020, 6, 15, 10, 0, 0);
+        final ZonedDateTime dateAsTime = ZonedDateTime.of(2020, 6, 15, 10, 0, 0, 0, ZoneId.of("Europe/London"));
 
         final Long productId = 35455L;
         final Long brandId = 1L;
@@ -148,7 +149,7 @@ public class ExampleIntegrationTests {
     public void test5() {
         // given
         final String date = "2020-06-16 21:00:00";
-        final LocalDateTime dateAsTime = LocalDateTime.of(2020, 6, 16, 21, 0, 0);
+        final ZonedDateTime dateAsTime = ZonedDateTime.of(2020, 6, 16, 21, 0, 0, 0, ZoneId.of("Europe/London"));
 
         final Long productId = 35455L;
         final Long brandId = 1L;

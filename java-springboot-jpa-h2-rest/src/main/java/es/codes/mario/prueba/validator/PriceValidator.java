@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,7 +17,7 @@ public class PriceValidator {
 
     /**
      * @param date -
-     * @return true if the param 'date' is a valid {@link LocalDateTime localDateTime} exactly with this format {@link DateFormats#EXPECTED_FORMAT}
+     * @return true if the param 'date' is a valid {@link ZonedDateTime zonedDateTime} exactly with this format {@link DateFormats#EXPECTED_FORMAT}
      */
     public boolean isValid(final String date) {
         if (StringUtils.isEmpty(date)) {
@@ -26,7 +28,9 @@ public class PriceValidator {
         boolean isValid = true;
         try {
             final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.EXPECTED_FORMAT.getFormat());
-            LocalDateTime.parse(date, formatter);
+            final LocalDateTime time = LocalDateTime.parse(date, formatter);
+            final ZoneId zone = ZoneId.of("Europe/London");
+            final ZonedDateTime zonedDateTime = ZonedDateTime.of(time, zone);
         } catch (final DateTimeParseException ex) {
             log.error("DateTimeParseException on parsing the date: " + date + ". " + ex.getMessage());
             isValid = false;

@@ -34,7 +34,7 @@ public class PriceServiceTest {
         // given
         final PriceRequest request = this.buildPriceRequest();
         final Optional<Price> optPrice = Optional.empty();
-        BDDMockito.given(daoMock.findOneByLocalDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
+        BDDMockito.given(daoMock.findOneByZonedDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
                 request.getProductId(), request.getBrandId())).willReturn(optPrice);
 
         // when
@@ -57,7 +57,7 @@ public class PriceServiceTest {
         final PriceRequest request = this.buildPriceRequest();
         final Price price = this.buildPrice();
         final Optional<Price> optPrice = Optional.of(price);
-        BDDMockito.given(daoMock.findOneByLocalDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
+        BDDMockito.given(daoMock.findOneByZonedDateTimeAndProductIdAndBrandId(request.getApplicationDate(),
                 request.getProductId(), request.getBrandId())).willReturn(optPrice);
 
         final PriceReducedDto dto = this.buildPriceReducedDto();
