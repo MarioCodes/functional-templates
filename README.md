@@ -34,6 +34,9 @@ Official images, without ini script. Initializes a blank database.
 ### Others
 I'll try to put start scripts at the root folder for the rest of them.
 
+## Technical Tests
+For technical tests use the template: `java-springboot-jpa-h2-rest`
+
 ## Known issues
-* `docker-jekyll` --reload option doesn't work
+* `docker-jekyll --reload` option doesn't work
 * `kotlin-spring` doesn't compile. All `kotlin-springboot` variants do though
