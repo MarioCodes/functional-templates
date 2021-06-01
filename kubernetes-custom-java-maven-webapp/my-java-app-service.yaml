@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: my-java-app
+  name: my-java-app
+spec:
+  type: NodePort
+  ports:
+    - name: "4001"
+      port: 4001
+      targetPort: 8080
+      nodePort: 31500
+  selector:
+    io.kompose.service: my-java-app
+status:
+  loadBalancer: {}

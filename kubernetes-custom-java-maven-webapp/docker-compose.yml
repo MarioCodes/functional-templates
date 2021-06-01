@@ -1,11 +1,12 @@
+# this is legacy and was already converted with kompose. left for documentation purposes.
 version: '3.7'
 services:
-
   my-java-app:
     build:
       context: ./my-java-app
       dockerfile: ./DockerFile
-    image: my-java-app:0.0.1
+    image: mariocodes/kubernetes-custom-java-maven-app
+    restart: always
     container_name: my-java-app
     ports: 
       - "4001:8080"
