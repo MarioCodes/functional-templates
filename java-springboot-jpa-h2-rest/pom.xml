@@ -18,7 +18,7 @@
     <hibernate.mysql.connector>8.0.16</hibernate.mysql.connector>
     <spring-data-jpa.version>2.1.8.RELEASE</spring-data-jpa.version>
     <datasource-hikari.version>3.3.1</datasource-hikari.version>
-    <database.h2.version>1.4.200</database.h2.version>
+    <database.h2.version>2.0.206</database.h2.version>
 
     <!-- caching -->
     <ehcache.version>2.10.6</ehcache.version>
