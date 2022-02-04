@@ -1,0 +1,45 @@
+# deployment metadata
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test-service
+  labels:
+    # deployment label
+    app: front
+# replicaset metadata
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      # searches for and replicates Pods with this label (mentioned below)
+      app: front
+  # from here on it references to the Pod
+  template:
+    metadata:
+      labels:
+        # create new Pods with this label
+        app: front
+    # Pod metadata
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+---
+# service metadata
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  labels:
+    app: front
+spec:
+  type: ClusterIP
+  selector:
+    # label to search pods (belongs to replicate for this example)
+    app: front
+  ports:
+    - protocol: TCP
+      # puerto externo
+      port: 8080
+      # puerto interno (donde se redirigen las llamadas a los Pods)
+      targetPort: 80

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-test
+  labels:
+    app: replicaset-test
+spec:
+  replicas: 3
+  # this searches for and replicates Pods with this label
+  selector:
+    matchLabels:
+      app: pod-label
+  # a partir de aqui hace referencia al Pod y ya no a replicaSet
+  template:
+    metadata:
+      labels:
+        # si no encuentra Pods con ese label, los creará incluyendo este label
+        app: pod-label
+    # metadatos del Pod. los mismo que hicimos al crear Pods sueltos con yaml
+    spec:
+      containers:
+      - name: replicaset-container-1
+        image: python:3.6-alpine
+        command: ['sh', '-c', 'echo cont1 > index.html && python -m http.server 8082']
+      - name: replicaset-container-2
+        image: python:3.6-alpine
+        command: ['sh', '-c', 'echo cont1 > index.html && python -m http.server 8083']

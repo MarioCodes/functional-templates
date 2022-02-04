@@ -1,0 +1,28 @@
+# deployment metadata
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    # this will be copied into changes history. change w. every udpdate.
+    kubernetes.io/change-cause: added this annotation
+  name: deployment-test
+  labels:
+    app: front
+# replicaset metadata
+spec:
+  replicas: 3
+  # searches for and replicates Pods with this label
+  selector:
+    matchLabels:
+      app: front
+  # from here on it references to the Pod
+  template:
+    metadata:
+      labels:
+        # crea los Pods nuevos con este label
+        app: front
+    # Pod metadata
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
