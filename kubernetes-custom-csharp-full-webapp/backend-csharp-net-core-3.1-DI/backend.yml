@@ -1,0 +1,47 @@
+﻿# deployment metadata
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-csharp-backend
+  labels:
+    # deployment label
+    app: backend
+# replicaset metadata
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      # searches for and replicates Pods with this label (mentioned below)
+      app: backend
+  # from here on it references to the Pod
+  template:
+    metadata:
+      labels:
+        # create new Pods with this label
+        app: backend
+    # Pod metadata
+    spec:
+      containers:
+      - name: backend
+        image: k8s-csharp-backend
+        # this uses local images. by default it tries to download them
+        imagePullPolicy: IfNotPresent
+---
+# service metadata
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-csharp-backend
+  labels:
+    app: backend
+spec:
+  type: NodePort
+  selector:
+    # label to search pods (belongs to replicate for this example)
+    app: backend
+  ports:
+    - protocol: TCP
+      # puerto externo
+      port: 80
+      # puerto interno de los Pods (donde se redirigen las llamadas a los Pods)
+      targetPort: 18796
