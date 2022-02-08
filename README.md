@@ -1,5 +1,8 @@
 Ready-to-code templates to start a project directly out of the box.
 
+## Templates to fix
+* java-spring
+
 ## Compile & Run
 ### Java & Kotlin
 They compile as a fat jar through maven.  
