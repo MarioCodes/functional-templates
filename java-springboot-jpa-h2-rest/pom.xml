@@ -35,7 +35,7 @@
     <apache.commons.collections.version>4.3</apache.commons.collections.version>
 
     <!-- Test Dependency Versions -->
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13.1</junit.version>
     <mockito.version>2.26.0</mockito.version>
     <assertj.version>3.12.2</assertj.version>
     <codearte.catchexception.version>1.4.6</codearte.catchexception.version>
