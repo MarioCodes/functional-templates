@@ -1,5 +1,8 @@
 Ready-to-code templates to start a project directly out of the box.
 
+## Templates to check
+* react-kotlin
+
 ## Templates to fix
 * java-spring
 
