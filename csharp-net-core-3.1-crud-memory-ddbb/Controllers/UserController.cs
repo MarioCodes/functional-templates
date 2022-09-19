@@ -35,6 +35,23 @@ namespace crud.Controllers
             }
         }
 
+        [HttpGet("regex")]
+        [SwaggerOperation(Tags = new[] { "configuration" })]
+        public async Task<IActionResult> GetRegex()
+        {
+            // validation
+
+            try
+            {
+                var regex = await _userService.GetRegex();
+                return Ok(regex);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPost("update")]
         [SwaggerOperation(Tags = new[] { "user" })]
         public async Task<IActionResult> UpdateUser([FromBody] RequestUserModel userModel)

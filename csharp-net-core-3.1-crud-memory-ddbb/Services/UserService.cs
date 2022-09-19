@@ -1,5 +1,6 @@
 ﻿using crud.Configuration;
 using crud.Models;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,18 @@ namespace crud.Services
     public class UserService : IUserService
     {
         private AppDbContext _dbContext;
+        private UserConfig _userConfig;
 
-        public UserService(AppDbContext dbContext)
+        public UserService(AppDbContext dbContext,
+            IOptions<UserConfig> userConfig)
         {
             _dbContext = dbContext;
+            _userConfig = userConfig.Value;
+        }
+
+        public async Task<string> GetRegex()
+        {
+            return _userConfig.EmailRegex;
         }
 
         public async Task<string> CreateUser(RequestUserModel userModel)
