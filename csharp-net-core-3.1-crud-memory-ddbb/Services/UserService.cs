@@ -1,5 +1,6 @@
 ﻿using crud.Configuration;
 using crud.Models;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,22 +10,31 @@ namespace crud.Services
     // implement real database service. 
     public class UserService : IUserService
     {
-        private AppDbContext _context;
+        private AppDbContext _dbContext;
+        private UserConfig _userConfig;
 
-        public UserService(AppDbContext context)
+        public UserService(AppDbContext dbContext,
+            IOptions<UserConfig> userConfig)
         {
-            _context = context;
+            _dbContext = dbContext;
+            _userConfig = userConfig.Value;
+        }
+
+        public async Task<string> GetRegex()
+        {
+            return _userConfig.EmailRegex;
         }
 
         public async Task<string> CreateUser(RequestUserModel userModel)
         {
-            var newId = _context.Users.Select(x => x.Id).Max()+1;
-            User user = await mapRequestUserToUser(userModel, newId);
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            var newId = _dbContext.Users
+                .Select(x => x.Id).Max()+1;
+            User user = await MapRequestUserToUser(userModel, newId);
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
             return "user created";
         }
-        private async Task<User> mapRequestUserToUser(RequestUserModel requestUser, int id)
+        private async Task<User> MapRequestUserToUser(RequestUserModel requestUser, int id)
         {
             return new User
             {
@@ -46,8 +56,9 @@ namespace crud.Services
 
         public async Task<ResponseListUserModel> GetUsers()
         {
-            var users = _context.Users.ToList();
-            List<ResponseUserModel> responseUsers = await mapUserToResponseUser(users);
+            var users = _dbContext.Users.ToList();
+            List<ResponseUserModel> responseUsers = users.Select(user => MapUserToResponseUser(user))
+                .ToList();
 
             return new ResponseListUserModel
             {
@@ -55,20 +66,15 @@ namespace crud.Services
             };
         }
 
-        private async Task<List<ResponseUserModel>> mapUserToResponseUser(List<User> users)
+        private ResponseUserModel MapUserToResponseUser(User user)
         {
-            var outUsers = new List<ResponseUserModel>();
-            foreach (var tmpUser in users)
+            var userModel = new ResponseUserModel
             {
-                var userModel = new ResponseUserModel
-                {
-                    Id = tmpUser.Id,
-                    Name = tmpUser.Name,
-                    Email = tmpUser.Email
-                };
-                outUsers.Add(userModel);
-            }
-            return outUsers;
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email
+            };
+            return userModel;
         }
 
         public async Task<string> UpdateUser(RequestUserModel userModel)
