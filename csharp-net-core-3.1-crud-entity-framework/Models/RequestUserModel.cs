@@ -6,11 +6,8 @@ namespace crud.Models
 {
     public class RequestUserModel
     {
-        [Required(ErrorMessage = "Name is mandatory")]
-        public string Name { get; set; }
-
-        [Required(ErrorMessage = "Email is mandatory")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Id is mandatory")]
+        public string Id { get; set; }
     }
 
     public class RequestUserListModel

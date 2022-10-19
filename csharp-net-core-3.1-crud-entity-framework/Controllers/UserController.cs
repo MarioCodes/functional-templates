@@ -9,7 +9,6 @@ namespace crud.Controllers
 {
     // add api versioning
     [ApiController]
-    [Route("user")]
     public class UserController : ControllerBase
     {
         private IUserService _userService;
@@ -19,7 +18,7 @@ namespace crud.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         [SwaggerOperation(Tags = new[] { "user" })]
         public async Task<IActionResult> GetUsers()
         {
@@ -35,7 +34,29 @@ namespace crud.Controllers
             }
         }
 
-        [HttpGet("regex")]
+        [HttpGet("user/{userId}")]
+        [SwaggerOperation(Tags = new[] { "user" })]
+        public async Task<IActionResult> GetUser(string userId)
+        {
+            // TODO: Add logging.
+
+            if(!(await _userService.ValidateUserId(userId)))
+            {
+                return StatusCode(500, "userID must be a positive number");
+            }
+
+            try
+            {
+                var user = await _userService.GetSpecificUser(int.Parse(userId));
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("user/regex")]
         [SwaggerOperation(Tags = new[] { "configuration" })]
         public async Task<IActionResult> GetRegex()
         {
@@ -52,7 +73,7 @@ namespace crud.Controllers
             }
         }
 
-        [HttpPost("update")]
+        [HttpPost("user/update")]
         [SwaggerOperation(Tags = new[] { "user" })]
         public async Task<IActionResult> UpdateUser([FromBody] RequestUserModel userModel)
         {

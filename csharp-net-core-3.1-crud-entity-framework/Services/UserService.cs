@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace crud.Services
 {
-    // implement real database service. 
     public class UserService : IUserService
     {
         private AppDbContext _dbContext;
@@ -18,6 +17,12 @@ namespace crud.Services
         {
             _dbContext = dbContext;
             _userConfig = userConfig.Value;
+        }
+
+        public async Task<bool> ValidateUserId(string userId)
+        {
+            return userId != "" 
+                && userId.All(char.IsDigit);
         }
 
         public async Task<string> GetRegex()
@@ -38,9 +43,7 @@ namespace crud.Services
         {
             return new User
             {
-                Id = id,
-                Name = requestUser.Name,
-                Email = requestUser.Email
+                Id = id
             };
         }
 
@@ -49,9 +52,11 @@ namespace crud.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<ResponseUserModel> GetSpecificUser(RequestUserModel userModel)
+        public async Task<ResponseUserModel> GetSpecificUser(int userId)
         {
-            throw new System.NotImplementedException();
+            var user = _dbContext.Users
+                .Find(userId);
+            return MapUserToResponseUser(user);
         }
 
         public async Task<ResponseListUserModel> GetUsers()
