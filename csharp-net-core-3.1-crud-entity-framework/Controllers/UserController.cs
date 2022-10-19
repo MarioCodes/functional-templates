@@ -72,21 +72,23 @@ namespace crud.Controllers
             }
         }
 
-        [HttpPost("user/insert")]
+        [HttpPost("user/upsert")]
         [SwaggerOperation(Tags = new[] { "user" })]
-        public async Task<IActionResult> InsertUser([FromBody] RequestUserModel userModel)
+        public async Task<IActionResult> UpsertUser([FromBody] RequestUserModel userModel)
         {
             // logging
 
             try
             {
+                string user; 
                 if((await _userService.UserExists(userModel)))
                 {
-                    return StatusCode(500, "there's already an user with that email");
+                    user = await _userService.UpdateUser(userModel);
+                } else
+                {
+                    user = await _userService.InsertUser(userModel);
                 }
-
-                var users = await _userService.InsertUser(userModel);
-                return Ok(users);
+                return Ok(user);
             }
             catch (Exception ex)
             {
@@ -94,22 +96,5 @@ namespace crud.Controllers
             }
         }
 
-        [HttpPost("user/update")]
-        [SwaggerOperation(Tags = new[] { "user" })]
-        public async Task<IActionResult> UpdateUser([FromBody] RequestUserModel userModel)
-        {
-            // validation
-            // logging
-
-            try
-            {
-                var users = await _userService.UpdateUser(userModel);
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
     }
 }

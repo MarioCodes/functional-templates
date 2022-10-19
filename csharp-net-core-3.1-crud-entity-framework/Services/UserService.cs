@@ -48,6 +48,9 @@ namespace crud.Services
 
         public async Task<string> UpdateUser(RequestUserModel userModel)
         {
+            var user = _dbContext.Users.FirstOrDefault(user => user.Email == userModel.Email);
+            user.Name = userModel.Name;
+            _dbContext.SaveChanges();
             return "user updated";
         }
 
