@@ -7,11 +7,12 @@ namespace crud.Services
     public interface IUserService
     {
         public Task<bool> ValidateUserId(string userId);
+        public Task<bool> UserExists(RequestUserModel userModel);
         public Task<ResponseListUserModel> GetUsers();
 
         public Task<ResponseUserModel> GetSpecificUser(int userId);
 
-        public Task<string> CreateUser(RequestUserModel userModel);
+        public Task<string> InsertUser(RequestUserModel userModel);
 
         public Task<string> UpdateUser(RequestUserModel userModel);
 

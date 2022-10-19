@@ -25,12 +25,18 @@ namespace crud.Services
                 && userId.All(char.IsDigit);
         }
 
+        public async Task<bool> UserExists(RequestUserModel userModel)
+        {
+            ResponseUserModel response = await GetSpecificUserByEmail(userModel.Email);
+            return response != null;
+        }
+
         public async Task<string> GetRegex()
         {
             return _userConfig.EmailRegex;
         }
 
-        public async Task<string> CreateUser(RequestUserModel userModel)
+        public async Task<string> InsertUser(RequestUserModel userModel)
         {
             var newId = _dbContext.Users
                 .Select(x => x.Id).Max()+1;
@@ -39,11 +45,19 @@ namespace crud.Services
             _dbContext.SaveChanges();
             return "user created";
         }
+
+        public async Task<string> UpdateUser(RequestUserModel userModel)
+        {
+            return "user updated";
+        }
+
         private async Task<User> MapRequestUserToUser(RequestUserModel requestUser, int id)
         {
             return new User
             {
-                Id = id
+                Id = id,
+                Email = requestUser.Email,
+                Name = requestUser.Name
             };
         }
 
@@ -56,7 +70,14 @@ namespace crud.Services
         {
             var user = _dbContext.Users
                 .Find(userId);
-            return MapUserToResponseUser(user);
+            return user != null ? MapUserToResponseUser(user) : null;
+        }
+
+        public async Task<ResponseUserModel> GetSpecificUserByEmail(string email)
+        {
+            var user = _dbContext.Users.Where(user => user.Email == email)
+                .FirstOrDefault();
+            return user != null ? MapUserToResponseUser(user) : null;
         }
 
         public async Task<ResponseListUserModel> GetUsers()
@@ -82,9 +103,5 @@ namespace crud.Services
             return userModel;
         }
 
-        public async Task<string> UpdateUser(RequestUserModel userModel)
-        {
-            return "user updated";
-        }
     }
 }

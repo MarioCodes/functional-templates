@@ -22,7 +22,7 @@ namespace crud.Controllers
         [SwaggerOperation(Tags = new[] { "user" })]
         public async Task<IActionResult> GetUsers()
         {
-            // validation
+            // TODO: Add logging.
 
             try
             {
@@ -36,10 +36,11 @@ namespace crud.Controllers
 
         [HttpGet("user/{userId}")]
         [SwaggerOperation(Tags = new[] { "user" })]
-        public async Task<IActionResult> GetUser(string userId)
+        public async Task<IActionResult> GetSpecificUser(string userId)
         {
             // TODO: Add logging.
 
+            // has flaws. Is just an example.
             if(!(await _userService.ValidateUserId(userId)))
             {
                 return StatusCode(500, "userID must be a positive number");
@@ -60,12 +61,32 @@ namespace crud.Controllers
         [SwaggerOperation(Tags = new[] { "configuration" })]
         public async Task<IActionResult> GetRegex()
         {
-            // validation
-
             try
             {
                 var regex = await _userService.GetRegex();
                 return Ok(regex);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("user/insert")]
+        [SwaggerOperation(Tags = new[] { "user" })]
+        public async Task<IActionResult> InsertUser([FromBody] RequestUserModel userModel)
+        {
+            // logging
+
+            try
+            {
+                if((await _userService.UserExists(userModel)))
+                {
+                    return StatusCode(500, "there's already an user with that email");
+                }
+
+                var users = await _userService.InsertUser(userModel);
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -78,6 +99,7 @@ namespace crud.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] RequestUserModel userModel)
         {
             // validation
+            // logging
 
             try
             {
