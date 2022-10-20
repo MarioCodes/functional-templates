@@ -27,7 +27,7 @@ namespace crud.Services
 
         public async Task<bool> UserExists(RequestUserModel userModel)
         {
-            ResponseUserModel response = await GetSpecificUserByEmail(userModel.Email);
+            ResponseUserModel response = await GetSpecificUser(userModel.Email);
             return response != null;
         }
 
@@ -54,21 +54,16 @@ namespace crud.Services
             return "user updated";
         }
 
-        private async Task<User> MapRequestUserToUser(RequestUserModel requestUser, int id)
+        public async Task DeleteUser(int userId)
         {
-            return new User
+            var user = _dbContext.Users.Find(userId);
+            if (user != null)
             {
-                Id = id,
-                Email = requestUser.Email,
-                Name = requestUser.Name
-            };
+                _dbContext.Users.Remove(user);
+                _dbContext.SaveChanges();
+            }
         }
-
-        public async Task DeleteUsers(List<RequestUserModel> userModel)
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         public async Task<ResponseUserModel> GetSpecificUser(int userId)
         {
             var user = _dbContext.Users
@@ -76,7 +71,7 @@ namespace crud.Services
             return user != null ? MapUserToResponseUser(user) : null;
         }
 
-        public async Task<ResponseUserModel> GetSpecificUserByEmail(string email)
+        public async Task<ResponseUserModel> GetSpecificUser(string email)
         {
             var user = _dbContext.Users.Where(user => user.Email == email)
                 .FirstOrDefault();
@@ -92,6 +87,16 @@ namespace crud.Services
             return new ResponseListUserModel
             {
                 Result = responseUsers
+            };
+        }
+
+        private async Task<User> MapRequestUserToUser(RequestUserModel requestUser, int id)
+        {
+            return new User
+            {
+                Id = id,
+                Email = requestUser.Email,
+                Name = requestUser.Name
             };
         }
 

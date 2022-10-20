@@ -40,7 +40,7 @@ namespace crud.Controllers
         {
             // TODO: Add logging.
 
-            // has flaws. Is just an example.
+            // has flaws. It's just an example.
             if(!(await _userService.ValidateUserId(userId)))
             {
                 return StatusCode(500, "userID must be a positive number");
@@ -57,6 +57,7 @@ namespace crud.Controllers
             }
         }
 
+        // TODO: Move
         [HttpGet("user/regex")]
         [SwaggerOperation(Tags = new[] { "configuration" })]
         public async Task<IActionResult> GetRegex()
@@ -89,6 +90,29 @@ namespace crud.Controllers
                     user = await _userService.InsertUser(userModel);
                 }
                 return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("user/delete/{userId}")]
+        [SwaggerOperation(Tags = new[] { "user" })]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            // TODO: Add logging.
+
+            // has flaws. It's just an example.
+            if (!(await _userService.ValidateUserId(userId)))
+            {
+                return StatusCode(500, "userID must be a positive number");
+            }
+
+            try
+            {
+                await _userService.DeleteUser(int.Parse(userId));
+                return Ok("user deleted");
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace crud.Services
 
         public Task<string> UpdateUser(RequestUserModel userModel);
 
-        public Task DeleteUsers(List<RequestUserModel> userModel);
+        public Task DeleteUser(int userId);
 
         public Task<string> GetRegex();
     }
