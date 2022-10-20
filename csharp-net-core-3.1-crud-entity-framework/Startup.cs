@@ -1,5 +1,6 @@
 using crud.Configuration;
 using crud.Services;
+using crudentityframework.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,7 @@ namespace crud
 
             // Custom Configurations
             services.Configure<UserConfig>(_config.GetSection(UserConfig.Section));
-
+            services.Configure<UserMockDataConfig>(_config.GetSection(UserMockDataConfig.Section));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

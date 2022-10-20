@@ -1,7 +1,9 @@
 using crud.Configuration;
+using crudentityframework.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace crud
 {
@@ -11,15 +13,13 @@ namespace crud
         {
             var host = CreateHostBuilder(args).Build();
 
-
             using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<AppDbContext>();
-
-                DataGenerator.Initialize(services);
+                IOptions<UserMockDataConfig> mockDataConfig = services.GetService<IOptions<UserMockDataConfig>>();
+                DataGenerator.Initialize(services, mockDataConfig.Value.Users);
             }
-
             host.Run();
         }
 
