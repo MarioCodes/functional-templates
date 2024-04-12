@@ -1,12 +1,17 @@
 Ready-to-code templates to start a project directly out of the box.
 
 ## Templates to check
-* react-kotlin
+
 
 ## Templates to fix
 * java-spring
+* react-kotlin
 
 ## Compile & Run
+### ASP.NET Core (C#)
+csharp-asp-net-core-3.1-basic-template: template dependency-injection-ready. Able to set config at appsettings.json. For basic testing.    
+csharp-asp-net-core-3.1-crud-memory-ddbb:  Rest API ready with Swagger and Entity Framework Core. It has an in-memory database for testing purposes. 
+
 ### Java & Kotlin
 They compile as a fat jar through maven.  
 Kotlin is first compiled to java code, and this to binaries. This way it's possible to write Java classes at Kotlin projects for ease of use.
