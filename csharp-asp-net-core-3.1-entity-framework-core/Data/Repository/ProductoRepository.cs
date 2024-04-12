@@ -1,4 +1,5 @@
 ﻿using EntityFramework.Models;
+using EntityFrameworkCore.Data.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework.Data.Repository

@@ -1,4 +1,4 @@
-﻿namespace EntityFramework.Data.Repository
+﻿namespace EntityFrameworkCore.Data.Repository.Interface
 {
     public interface IRepository<T>
     {

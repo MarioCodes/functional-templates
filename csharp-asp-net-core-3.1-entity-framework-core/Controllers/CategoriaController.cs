@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using EntityFramework.Data;
 using EntityFramework.Models;
-using EntityFramework.Data.Repository;
+using EntityFrameworkCore.Data.Repository.Interface;
 
 namespace EntityFramework.Controllers
 {
