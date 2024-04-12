@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "strategyPattern": {
+    "basicTemplate": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
