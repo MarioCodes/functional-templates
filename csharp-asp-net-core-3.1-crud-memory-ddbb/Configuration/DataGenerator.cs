@@ -34,8 +34,8 @@ namespace crud.Configuration
                     new User
                     {
                         Id = 3,
-                        Name = "Ana",
-                        Email = "anika@gmail.com"
+                        Name = "Antonia",
+                        Email = "antonia@gmail.com"
                     }
                 );
 
