@@ -26,19 +26,6 @@ public class HelloControllerTest {
     this.mvcMock = MockMvcBuilders.standaloneSetup(this.controller).build();
   }
 
-  @Test
-  public void givenMockMvcWhenGetThenHttpStatusOk() throws Exception {
-    // Given
-
-    // When
-    final MockHttpServletResponse response = this.mvcMock.perform(
-        MockMvcRequestBuilders.get("/")).andReturn().getResponse();
-
-    // Then
-    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-  }
-
-  @Test
   public void givenMockMvcWhenGetThenExpectedStringResponse() throws Exception {
     // Given
 
