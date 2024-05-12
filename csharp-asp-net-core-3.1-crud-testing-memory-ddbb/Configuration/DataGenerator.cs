@@ -10,7 +10,7 @@ namespace crud.Configuration
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using(var context = new AppDbContext(serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>()))
+            using(var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 if(context.Users.Any())
                 {

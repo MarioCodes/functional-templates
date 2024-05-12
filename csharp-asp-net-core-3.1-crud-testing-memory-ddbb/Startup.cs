@@ -31,7 +31,7 @@ namespace crud
             services.AddScoped<IUserService, UserService>();
             
             // Database
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "InMemoryTestDatabase"));
 
             // Custom Configurations

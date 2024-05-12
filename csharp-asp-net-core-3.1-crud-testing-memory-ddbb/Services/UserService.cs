@@ -10,10 +10,10 @@ namespace crud.Services
     // implement real database service. 
     public class UserService : IUserService
     {
-        private AppDbContext _dbContext;
+        private ApplicationDbContext _dbContext;
         private UserConfig _userConfig;
 
-        public UserService(AppDbContext dbContext,
+        public UserService(ApplicationDbContext dbContext,
             IOptions<UserConfig> userConfig)
         {
             _dbContext = dbContext;
@@ -64,6 +64,11 @@ namespace crud.Services
             {
                 Result = responseUsers
             };
+        }
+
+        public async Task<string> GetSomething()
+        {
+            return "this is a return value";
         }
 
         private ResponseUserModel MapUserToResponseUser(User user)

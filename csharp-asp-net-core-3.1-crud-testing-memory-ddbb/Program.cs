@@ -15,7 +15,7 @@ namespace crud
             using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AppDbContext>();
+                var context = services.GetRequiredService<ApplicationDbContext>();
 
                 DataGenerator.Initialize(services);
             }
