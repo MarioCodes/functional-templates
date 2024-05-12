@@ -1,6 +1,7 @@
 ﻿using crud.Configuration;
 using crud.Models;
 using crud.Services;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -48,8 +49,8 @@ namespace crud_memory_ddbb.Tests
                 var users = await _service.GetUsers();
 
                 // then
-                Assert.That(users.Result, Is.Not.Null);
-                Assert.That(users.Result, Is.Not.Empty);
+                users.Result.Should().NotBeNullOrEmpty();
+                users.Result.Should().HaveCount(3);
             }
         }
     }
