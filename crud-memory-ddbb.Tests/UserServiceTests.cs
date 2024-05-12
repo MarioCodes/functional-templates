@@ -1,4 +1,5 @@
 ﻿using crud.Configuration;
+using crud.Models;
 using crud.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -11,39 +12,67 @@ namespace crud_memory_ddbb.Tests
     [TestFixture]
     public class UserServiceTests
     {
-        public IUserService _service;
+        private IUserService _service;
 
-        private Mock<ApplicationDbContext> _dbContextMock;
         private Mock<UserConfig> _userConfigMock;
         private Mock<IOptions<UserConfig>> _iOptionsMock;
+        private DbContextOptions<ApplicationDbContext> _optionsStub;
 
         [SetUp]
         public void SetUp()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var context = new Mock<ApplicationDbContext>(optionsBuilder.Options);
-
-            _dbContextMock = new Mock<ApplicationDbContext>();
             _userConfigMock = new Mock<UserConfig>();
             _iOptionsMock = new Mock<IOptions<UserConfig>>();
-            _service = new UserService(context.Object, _iOptionsMock.Object);
+
+            _optionsStub = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "usersTestingDatabase")
+                .Options;
+
+            _iOptionsMock.Setup(s => s.Value).Returns(_userConfigMock.Object);
+        }
+
+        [Test]
+        public async Task TestUserService_GetUsers_ReturnsSomething()
+        {
+            // we need to insert seed data for each test
+            using (var context = new ApplicationDbContext(_optionsStub))
+            {
+                // given
+                context.Users.Add(new User { Id = 1, Email = "test-email-1@gmail.com", Name = "Test-User-1" });
+                context.Users.Add(new User { Id = 2, Email = "test-email-2@gmail.com", Name = "Test-User-2" });
+                context.Users.Add(new User { Id = 3, Email = "test-email-3@gmail.com", Name = "Test-User-3" });
+                _service = new UserService(context, _iOptionsMock.Object);
+
+                // when
+                string returnString = await _service.GetSomething();
+
+                // then 
+                Assert.That(returnString, Is.Not.Null);
+                Assert.That(returnString, Is.Not.Empty);
+                Assert.That(returnString, Is.EqualTo("this is a return value"));
+            }
         }
 
         [Test]
         public async Task UserService_GetUsers_ReturnsAllUsers()
         {
-            // given 
+            // we need to insert seed data for each test
+            using (var context = new ApplicationDbContext(_optionsStub))
+            {
+                // given
+                context.Users.Add(new User { Id = 1, Email = "test-email-1@gmail.com", Name = "Test-User-1" });
+                context.Users.Add(new User { Id = 2, Email = "test-email-2@gmail.com", Name = "Test-User-2" });
+                context.Users.Add(new User { Id = 3, Email = "test-email-3@gmail.com", Name = "Test-User-3" });
+                context.SaveChanges();
+                _service = new UserService(context, _iOptionsMock.Object);
 
+                // when
+                var users = await _service.GetUsers();
 
-            _iOptionsMock.Setup(s => s.Value).Returns(_userConfigMock.Object);
-
-            // when
-            string test = await _service.GetSomething();
-
-            // then 
-            Assert.That(test, Is.Not.Null);
-            Assert.That(test, Is.Not.Empty);
-            Assert.That(test, Is.EqualTo("this is a return value"));
+                // then
+                Assert.That(users.Result, Is.Not.Null);
+                Assert.That(users.Result, Is.Not.Empty);
+            }
         }
     }
 }
