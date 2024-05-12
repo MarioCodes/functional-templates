@@ -7,7 +7,6 @@ namespace crud.Services
     public interface IUserService
     {
         public Task<ResponseListUserModel> GetUsers();
-        public Task<string> GetSomething();
         public Task<ResponseUserModel> GetSpecificUser(RequestUserModel userModel);
 
         public Task<string> CreateUser(RequestUserModel userModel);

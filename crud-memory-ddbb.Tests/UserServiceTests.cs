@@ -32,28 +32,6 @@ namespace crud_memory_ddbb.Tests
         }
 
         [Test]
-        public async Task TestUserService_GetUsers_ReturnsSomething()
-        {
-            // we need to insert seed data for each test
-            using (var context = new ApplicationDbContext(_optionsStub))
-            {
-                // given
-                context.Users.Add(new User { Id = 1, Email = "test-email-1@gmail.com", Name = "Test-User-1" });
-                context.Users.Add(new User { Id = 2, Email = "test-email-2@gmail.com", Name = "Test-User-2" });
-                context.Users.Add(new User { Id = 3, Email = "test-email-3@gmail.com", Name = "Test-User-3" });
-                _service = new UserService(context, _iOptionsMock.Object);
-
-                // when
-                string returnString = await _service.GetSomething();
-
-                // then 
-                Assert.That(returnString, Is.Not.Null);
-                Assert.That(returnString, Is.Not.Empty);
-                Assert.That(returnString, Is.EqualTo("this is a return value"));
-            }
-        }
-
-        [Test]
         public async Task UserService_GetUsers_ReturnsAllUsers()
         {
             // we need to insert seed data for each test

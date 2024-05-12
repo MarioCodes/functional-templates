@@ -66,11 +66,6 @@ namespace crud.Services
             };
         }
 
-        public async Task<string> GetSomething()
-        {
-            return "this is a return value";
-        }
-
         private ResponseUserModel MapUserToResponseUser(User user)
         {
             var userModel = new ResponseUserModel
