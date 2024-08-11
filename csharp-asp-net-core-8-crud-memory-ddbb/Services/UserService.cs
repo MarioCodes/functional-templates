@@ -8,17 +8,10 @@ using System.Threading.Tasks;
 namespace crud.Services
 {
     // implement real database service. 
-    public class UserService : IUserService
+    public class UserService(AppDbContext _dbContext, IOptions<UserConfig> userConfig) : IUserService
     {
-        private AppDbContext _dbContext;
-        private UserConfig _userConfig;
 
-        public UserService(AppDbContext dbContext,
-            IOptions<UserConfig> userConfig)
-        {
-            _dbContext = dbContext;
-            _userConfig = userConfig.Value;
-        }
+        private UserConfig _userConfig => userConfig.Value;
 
         public async Task<string> GetRegex()
         {
