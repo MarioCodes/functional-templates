@@ -1,16 +1,9 @@
 Ready-to-code templates to start a project directly out of the box.
 
-## Templates to check
-
-
-## Templates to fix
-* java-spring
-* react-kotlin
-
 ## Compile & Run
-### ASP.NET Core (C#)
-csharp-asp-net-core-3.1-basic-template: template dependency-injection-ready. Able to set config at appsettings.json. For basic testing.    
-csharp-asp-net-core-3.1-crud-memory-ddbb:  Rest API ready with Swagger and Entity Framework Core. It has an in-memory database for testing purposes. 
+### .NET 8 (updated to C# 12)
+* *basic-template*: template dependency-injection-ready. Able to set config at appsettings.json. For basic & quick features testing    
+* *crud-memory-ddbb*:  Rest API ready with Swagger and EF Core. It has an in-memory database for testing purposes
 
 ### Java & Kotlin
 They compile as a fat jar through maven.  
