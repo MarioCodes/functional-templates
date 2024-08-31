@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.interfaces;
 
 namespace testFeatures
 {
@@ -27,9 +28,10 @@ namespace testFeatures
             services.AddControllers();
             services.AddSwaggerGen();
 
-            // Services
+            // Services (scoped as they use appcontext - EF Core)
             services.AddScoped<IUserService, UserService>();
-            
+            services.AddScoped<ITestService, TestService>();
+
             // Database
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "InMemoryTestDatabase"));
