@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Moq;
+using Services.interfaces;
 using testFeatures.Configuration;
 using testFeatures.Models;
 using testFeatures.Services;

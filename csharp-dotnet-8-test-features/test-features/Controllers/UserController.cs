@@ -1,9 +1,9 @@
 ﻿using testFeatures.Models;
-using testFeatures.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
+using Services.interfaces;
 
 namespace testFeatures.Controllers
 {
