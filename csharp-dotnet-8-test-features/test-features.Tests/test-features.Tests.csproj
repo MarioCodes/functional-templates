@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\test-features\test-features.csproj" />
+    <ProjectReference Include="..\test-features\testFeatures.csproj" />
   </ItemGroup>
 
   <ItemGroup>
