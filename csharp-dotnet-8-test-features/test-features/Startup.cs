@@ -32,6 +32,9 @@ namespace testFeatures
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
 
+            // add health checks - first part -> dependant on app.UseHealthChecks
+            services.AddHealthChecks();
+
             // Database
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "InMemoryTestDatabase"));
@@ -60,6 +63,9 @@ namespace testFeatures
             {
                 endpoints.MapControllers();
             });
+
+            // register concrete endpoint for health checks
+            app.UseHealthChecks("/beat");
         }
     }
 }
