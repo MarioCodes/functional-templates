@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.interfaces;
+using testFeatures.Middleware;
 
 namespace testFeatures
 {
@@ -32,6 +33,13 @@ namespace testFeatures
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
 
+            // middleware - first part -> dependant on app.UseMiddleware
+            services.AddTransient<IMiddlewareService, MiddlewareService>();
+            services.AddTransient<CustomMiddleware>();
+
+            // add health checks - first part -> dependant on app.UseHealthChecks
+            services.AddHealthChecks();
+
             // Database
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "InMemoryTestDatabase"));
@@ -56,10 +64,16 @@ namespace testFeatures
             }
 
             app.UseRouting();
+
+            // register middleware <- has to be before ¡app.UseEndpoints()!
+            app.UseMiddleware<CustomMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            // register concrete endpoint for health checks
+            app.UseHealthChecks("/beat");
         }
     }
 }
