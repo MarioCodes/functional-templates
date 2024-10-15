@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using testFeatures.Middleware.interfaces;
 
 namespace testFeatures.Middleware
 {

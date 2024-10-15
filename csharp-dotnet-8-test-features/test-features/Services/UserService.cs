@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Services.interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace testFeatures.Services
 {
-    // implement real database service. 
+    // implement real database service.
     public class UserService(AppDbContext _dbContext, IOptions<UserConfig> userConfig) : IUserService
     {
 
@@ -21,8 +22,8 @@ namespace testFeatures.Services
 
         public async Task<string> CreateUser(RequestUserModel userModel)
         {
-            var newId = _dbContext.Users
-                .Select(x => x.Id).Max()+1;
+            var newId = _dbContext.Users.Select(user => user.Id)
+                .Max()+1;
             User user = await MapRequestUserToUser(userModel, newId);
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
@@ -34,13 +35,22 @@ namespace testFeatures.Services
             {
                 Id = id,
                 Name = requestUser.Name,
-                Email = requestUser.Email
+                Email = requestUser.Email,
+                Active = true
             };
         }
 
         public async Task DeleteUsers(List<RequestUserModel> userModel)
         {
-            throw new System.NotImplementedException();
+            var inputUsersEmail = userModel.Select(user => user.Email)
+                .ToList();
+
+            var onlyUsersToDelete = _dbContext.Users.Where(user => inputUsersEmail.Contains(user.Email))
+                .ToList();
+
+            var deletedUsers = onlyUsersToDelete.Select(user => user.Active = false).ToList();
+            _dbContext.Users.UpdateRange(onlyUsersToDelete);
+            _dbContext.SaveChanges();
         }
 
         public async Task<ResponseUserModel> GetSpecificUser(RequestUserModel userModel)
@@ -48,15 +58,39 @@ namespace testFeatures.Services
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Get all active <see cref="User"/>. There's a global filter set to EF Core inside <see cref="AppDbContext.OnModelCreating(ModelBuilder)"/>
+        /// </summary>
+        /// <returns>
+        /// Returns <see cref="ResponseUserModel"/> which contains only active users
+        /// </returns>
         public async Task<ResponseListUserModel> GetUsers()
         {
-            var users = _dbContext.Users.ToList();
-            List<ResponseUserModel> responseUsers = users.Select(user => MapUserToResponseUser(user))
+            List<ResponseUserModel> users = _dbContext.Users.Select(user => MapUserToResponseUser(user))
                 .ToList();
 
             return new ResponseListUserModel
             {
-                Result = responseUsers
+                Result = users
+            };
+        }
+
+        /// <summary>
+        /// Get only (soft) deleted <see cref="User"/>. This invalids the global filter set to EF Core inside <see cref="AppDbContext.OnModelCreating(ModelBuilder)"/>
+        /// </summary>
+        /// <returns>
+        /// Returns <see cref="ResponseListUserModel"/> which contains only (soft) deleted users
+        /// </returns>
+        public async Task<ResponseListUserModel> GetSoftDeletedUsers()
+        {
+            List<ResponseUserModel> users = _dbContext.Users.IgnoreQueryFilters()
+                .Where(user => !user.Active)
+                .Select(user => MapUserToResponseUser(user))
+                .ToList();
+
+            return new ResponseListUserModel
+            {
+                Result = users
             };
         }
 
@@ -66,7 +100,8 @@ namespace testFeatures.Services
             {
                 Id = user.Id,
                 Name = user.Name,
-                Email = user.Email
+                Email = user.Email,
+                Active = user.Active
             };
             return userModel;
         }

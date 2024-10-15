@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.interfaces;
 using testFeatures.Middleware;
+using testFeatures.Middleware.interfaces;
 
 namespace testFeatures
 {
@@ -31,7 +32,6 @@ namespace testFeatures
 
             // Services (scoped as they use appcontext - EF Core)
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITestService, TestService>();
 
             // middleware - first part -> dependant on app.UseMiddleware
             services.AddTransient<IMiddlewareService, MiddlewareService>();

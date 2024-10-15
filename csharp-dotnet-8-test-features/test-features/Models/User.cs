@@ -15,5 +15,6 @@ namespace testFeatures.Models
         public string LongEmail { get; set; }
         public string Username { get; set; }
         public string Address { get; set; }
+        public bool Active { get; set; }
     }
 }
