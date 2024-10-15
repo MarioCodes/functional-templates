@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace testFeatures.Middleware
+namespace testFeatures.Middleware.interfaces
 {
     public interface IMiddlewareService
     {

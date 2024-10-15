@@ -8,7 +8,7 @@ using Services.interfaces;
 
 namespace testFeatures.Services
 {
-    // implement real database service. 
+    // implement real database service.
     public class UserService(AppDbContext _dbContext, IOptions<UserConfig> userConfig) : IUserService
     {
 
@@ -21,8 +21,8 @@ namespace testFeatures.Services
 
         public async Task<string> CreateUser(RequestUserModel userModel)
         {
-            var newId = _dbContext.Users
-                .Select(x => x.Id).Max()+1;
+            var newId = _dbContext.Users.Select(user => user.Id)
+                .Max()+1;
             User user = await MapRequestUserToUser(userModel, newId);
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
@@ -34,13 +34,22 @@ namespace testFeatures.Services
             {
                 Id = id,
                 Name = requestUser.Name,
-                Email = requestUser.Email
+                Email = requestUser.Email,
+                Active = true
             };
         }
 
         public async Task DeleteUsers(List<RequestUserModel> userModel)
         {
-            throw new System.NotImplementedException();
+            var usersEmail = userModel.Select(user => user.Email)
+                .ToList();
+
+            var usersToDelete = _dbContext.Users.Where(user => usersEmail.Contains(user.Email))
+                .ToList();
+
+            var deletedUsers = usersToDelete.Select(user => user.Active = false).ToList();
+            _dbContext.Users.UpdateRange(usersToDelete);
+            _dbContext.SaveChanges();
         }
 
         public async Task<ResponseUserModel> GetSpecificUser(RequestUserModel userModel)
@@ -66,7 +75,8 @@ namespace testFeatures.Services
             {
                 Id = user.Id,
                 Name = user.Name,
-                Email = user.Email
+                Email = user.Email,
+                Active = user.Active
             };
             return userModel;
         }

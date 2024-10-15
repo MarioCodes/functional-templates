@@ -11,6 +11,7 @@ namespace testFeatures.Models
 
         [Required(ErrorMessage = "Email is mandatory")]
         public string Email { get; set; }
+        public bool Active { get; set; }
     }
 
     public class RequestUserListModel

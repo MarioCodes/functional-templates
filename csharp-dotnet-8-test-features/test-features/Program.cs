@@ -17,7 +17,7 @@ namespace testFeatures
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<AppDbContext>();
 
-                DataGenerator.Initialize(services);
+                TestingDataGenerator.Initialize(services);
             }
 
             host.Run();

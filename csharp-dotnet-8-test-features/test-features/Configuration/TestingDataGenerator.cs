@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace testFeatures.Configuration
 {
-    public class DataGenerator
+    public class TestingDataGenerator
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -14,8 +14,8 @@ namespace testFeatures.Configuration
             {
                 if(context.Users.Any())
                 {
-                    // there's already data. 
-                    return; 
+                    // there's already data
+                    return;
                 }
 
                 context.Users.AddRange(
@@ -23,19 +23,22 @@ namespace testFeatures.Configuration
                     {
                         Id = 1,
                         Name = "Mario",
-                        Email = "nothing@gmail.com"
+                        Email = "nothing@gmail.com",
+                        Active = true
                     },
                     new User
                     {
                         Id = 2,
                         Name = "Ramon",
-                        Email = "something@gmail.com"
+                        Email = "something@gmail.com",
+                        Active = true
                     },
                     new User
                     {
                         Id = 3,
                         Name = "Antonia",
-                        Email = "antonia@gmail.com"
+                        Email = "antonia@gmail.com",
+                        Active = true
                     }
                 );
 
