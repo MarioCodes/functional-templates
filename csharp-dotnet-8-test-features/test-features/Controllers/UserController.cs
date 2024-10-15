@@ -27,6 +27,21 @@ namespace testFeatures.Controllers
             }
         }
 
+        [HttpGet("getSoftDeletedUsers")]
+        [SwaggerOperation(Tags = new[] { "user" })]
+        public async Task<IActionResult> GetDeletedUsers([FromServices] IUserService userService)
+        {
+            try
+            {
+                var users = await userService.GetSoftDeletedUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpGet("regex")]
         [SwaggerOperation(Tags = new[] { "configuration" })]
         public async Task<IActionResult> GetRegex([FromServices] IUserService userService)
