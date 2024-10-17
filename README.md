@@ -14,10 +14,16 @@ My own ready-to-code templates to start a project directly out of the box.
   * testing data generation for EF Core
   * global query filters for EF Core
   * really basic testing with NUnit
----
 
+## Docker
+To update, as they are really old
+
+## Kubernetes
+To update, as I didn't really know what I was doing back when I created them
+
+---
 ## Outdated
-I don't really work with Java anymore, but I leave this for reasons
+I don't really work with Java, Kotlin or Android anymore, but I leave this for reasons
 
 ### Java & Kotlin
 They compile as a fat jar through maven.  
