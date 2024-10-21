@@ -3,8 +3,9 @@ My own ready-to-code templates to start a project directly out of the box.
 ## .NET 8 (updated to C# 12)
 * `basic-template`: my most simple template, ready to start. You're able to set config at appsettings.json. For really basic features. 
 * `crud-memory-ddbb` it's the same as `basic-template` but ready with an *in-memory* database to be able to use Entity Framework Core
-* `multi-project` the best one for serious personal projects and interview challenges. the best one which includes unit testing usage.
+* `multi-project` the best one for serious personal projects and interview challenges. this project includes: complete unit testing & coverlet usage *(to see code and branch coverage)*.
   * the main project to open is `Api.Core`
+  * this is a template. don't try to run it, as important private info is missing from the repository
 * `test-features` not so much a template, but a project I use for really quick testing where I leave code examples for things I may use in the future. Right now, it includes:
   * how to use custom configuration
   * how to use custom middleware
