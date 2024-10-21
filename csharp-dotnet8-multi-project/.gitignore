@@ -41,3 +41,9 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+Api.Core.Tests/obj/
+Api.Core.Tests/bin/
+
+Api.External.Consumer/obj/
+
+Api.Extermal.Consumer.Tests/obj/

@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Core", "Api.Core.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Core.Tests", "..\Api.Core.Tests\Api.Core.Tests.csproj", "{02D4B47A-3DAE-4018-B780-693B713AF249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.External.Consumer", "..\Api.External.Consumer\Api.External.Consumer.csproj", "{2B1CB464-1663-4C83-B4F3-0901E7F9041F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.External.Consumer", "..\Api.External.Consumer\Api.External.Consumer.csproj", "{2B1CB464-1663-4C83-B4F3-0901E7F9041F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.External.Consumer.Tests", "..\Api.Extermal.Consumer.Tests\Api.External.Consumer.Tests.csproj", "{272C0B5B-8B4D-4B99-BD8F-5292916F45A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.External.Consumer.Tests", "..\Api.Extermal.Consumer.Tests\Api.External.Consumer.Tests.csproj", "{272C0B5B-8B4D-4B99-BD8F-5292916F45A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
