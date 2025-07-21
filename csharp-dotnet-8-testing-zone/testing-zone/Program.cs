@@ -1,5 +1,5 @@
-using template.Models;
-using template.Models.algorithms.implementations;
+using System;
+using testingZone.Feature;
 
 namespace template
 {
@@ -7,10 +7,8 @@ namespace template
     {
         public static void Main(string[] args)
         {
-            Duck duck = new MallardDuck(new Quack(), new FlyNoWay());
-            duck.PerformQuack();
-            duck.PerformFly();
-            duck.Display();
+            PassByValueAndReference service = new();
+            service.Start();
         }
 
     }
