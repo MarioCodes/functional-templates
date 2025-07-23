@@ -1,14 +1,15 @@
 using System;
+using System.Threading.Tasks;
 using testingZone.Feature;
 
 namespace template
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            PassByValueAndReference service = new();
-            service.Start();
+            TapProgramming service = new();
+            await service.Start();
         }
 
     }

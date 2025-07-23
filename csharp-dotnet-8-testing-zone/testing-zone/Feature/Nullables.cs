@@ -5,7 +5,7 @@ namespace testingZone.Feature
 {
     public class Nullables
     {
-        public void checkIfNullableIntHasValue()
+        public void CheckIfNullableIntHasValue()
         {
             int? numMayBeNull = null;
             if(numMayBeNull is int numValue)
@@ -15,7 +15,7 @@ namespace testingZone.Feature
             }
         }
 
-        public void checkIfListIsEmpty()
+        public void CheckIfListIsEmpty()
         {
             List<string> someList = ["something"];
             if(someList is not [])
