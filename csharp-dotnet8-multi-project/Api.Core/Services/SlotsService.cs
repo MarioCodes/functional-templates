@@ -23,19 +23,19 @@ namespace Api.Core.Services
             if (externalWeekData is null)
                 throw new InvalidOperationException($"{_config.InvalidDataFromExternalApiError} for date {date.ToString()}");
 
-            var weekAvailability = await GetWeekPlanning(date, externalWeekData);
-            weekAvailability.Facility = await GetFacilityData(externalWeekData);
+            var weekAvailability = GetWeekPlanning(date, externalWeekData);
+            weekAvailability.Facility = GetFacilityData(externalWeekData);
             return weekAvailability;
         }
 
         public async Task<string> ReserveSlotAsync(ReserveSlotRequest request)
         {
             // I do this mapping to decouple input data from data I send to the external API as it may change over time and we may need to adapt to it
-            var mappedReserveSlot = await MapReserveSlot(request);
+            var mappedReserveSlot = MapReserveSlot(request);
             return await _externalApiService.ReserveSlotAsync(mappedReserveSlot);
         }
 
-        private async Task<ReserveSlotDTO> MapReserveSlot(ReserveSlotRequest request)
+        private ReserveSlotDTO MapReserveSlot(ReserveSlotRequest request)
         {
             return new ReserveSlotDTO
             {
@@ -53,7 +53,7 @@ namespace Api.Core.Services
             };
         }
 
-        private async Task<Facility> GetFacilityData(WeekAvailabilityDTO externalData)
+        private Facility GetFacilityData(WeekAvailabilityDTO externalData)
         {
             var facility = externalData.Facility;
             return new Facility
@@ -63,27 +63,27 @@ namespace Api.Core.Services
             };
         }
 
-        private async Task<WeekAvailabilityResponse> GetWeekPlanning(DateOnly date, WeekAvailabilityDTO externalWeekData) 
+        private WeekAvailabilityResponse GetWeekPlanning(DateOnly date, WeekAvailabilityDTO externalWeekData) 
         {
             var weeklyPlanning = new WeekAvailabilityResponse();
             int duration = externalWeekData.SlotDurationMinutes;
             
-            weeklyPlanning.Monday = await GetDayPlanning(date.AddDays(0), externalWeekData.Monday, duration);
-            weeklyPlanning.Tuesday = await GetDayPlanning(date.AddDays(1), externalWeekData.Tuesday, duration);
-            weeklyPlanning.Wednesday = await GetDayPlanning(date.AddDays(2), externalWeekData.Wednesday, duration);
-            weeklyPlanning.Thursday = await GetDayPlanning(date.AddDays(3), externalWeekData.Thursday, duration);
-            weeklyPlanning.Friday = await GetDayPlanning(date.AddDays(4), externalWeekData.Friday, duration);
-            weeklyPlanning.Saturday = await GetDayPlanning(date.AddDays(5), externalWeekData.Saturday, duration);
-            weeklyPlanning.Sunday = await GetDayPlanning(date.AddDays(6), externalWeekData.Sunday, duration);
+            weeklyPlanning.Monday = GetDayPlanning(date.AddDays(0), externalWeekData.Monday, duration);
+            weeklyPlanning.Tuesday = GetDayPlanning(date.AddDays(1), externalWeekData.Tuesday, duration);
+            weeklyPlanning.Wednesday = GetDayPlanning(date.AddDays(2), externalWeekData.Wednesday, duration);
+            weeklyPlanning.Thursday = GetDayPlanning(date.AddDays(3), externalWeekData.Thursday, duration);
+            weeklyPlanning.Friday = GetDayPlanning(date.AddDays(4), externalWeekData.Friday, duration);
+            weeklyPlanning.Saturday = GetDayPlanning(date.AddDays(5), externalWeekData.Saturday, duration);
+            weeklyPlanning.Sunday = GetDayPlanning(date.AddDays(6), externalWeekData.Sunday, duration);
 
             return weeklyPlanning;
         }
 
-        private async Task<Day?> GetDayPlanning(DateOnly date, DayDTO? daySchedule, int slotDuration)
+        private Day? GetDayPlanning(DateOnly date, DayDTO? daySchedule, int slotDuration)
         {
             Day day = new Day();
 
-            var daySlots = await GetDaySlots(date.AddDays(0), daySchedule, slotDuration);
+            var daySlots = GetDaySlots(date.AddDays(0), daySchedule, slotDuration);
             if(daySlots.Any())
             {
                 day.AvailableSlots = daySlots;
@@ -94,24 +94,24 @@ namespace Api.Core.Services
             return null;
         }
 
-        private async Task<List<AvailableSlot>> GetDaySlots(DateOnly inputDay, DayDTO? daySchedule, int slotDuration)
+        private List<AvailableSlot> GetDaySlots(DateOnly inputDay, DayDTO? daySchedule, int slotDuration)
         {
             if (daySchedule is null)
                 return new List<AvailableSlot>();
 
             List<AvailableSlot> availableSlots = [];
-            DateTime workshiftStart = await ConvertToDateTime(inputDay, daySchedule.WorkPeriod.StartHour);
-            DateTime workshiftEnd = await ConvertToDateTime(inputDay, daySchedule.WorkPeriod.EndHour);
+            DateTime workshiftStart = ConvertToDateTime(inputDay, daySchedule.WorkPeriod.StartHour);
+            DateTime workshiftEnd = ConvertToDateTime(inputDay, daySchedule.WorkPeriod.EndHour);
 
-            DateTime lunchStart = await ConvertToDateTime(inputDay, daySchedule.WorkPeriod.LunchStartHour);
-            DateTime lunchEnd = await ConvertToDateTime(inputDay, daySchedule.WorkPeriod.LunchEndHour);
+            DateTime lunchStart = ConvertToDateTime(inputDay, daySchedule.WorkPeriod.LunchStartHour);
+            DateTime lunchEnd = ConvertToDateTime(inputDay, daySchedule.WorkPeriod.LunchEndHour);
 
             DateTime slotStart = workshiftStart;
             while (slotStart < workshiftEnd)
             {
                 DateTime slotEnd = slotStart.AddMinutes(slotDuration);
 
-                if (await ItsLunchtime(lunchStart, lunchEnd, slotStart))
+                if (ItsLunchtime(lunchStart, lunchEnd, slotStart))
                 {
                     // for cases where lunch duration is > 1 hour
                     int lunchTimeDuration =  lunchEnd.Hour - lunchStart.Hour;
@@ -121,7 +121,7 @@ namespace Api.Core.Services
                     continue;
                 }
 
-                if (await IsSlotFree(daySchedule, slotStart, slotEnd))
+                if (IsSlotFree(daySchedule, slotStart, slotEnd))
                 {
                     availableSlots.Add(new AvailableSlot { StartTime = slotStart, EndTime = slotEnd });
                 }
@@ -132,18 +132,18 @@ namespace Api.Core.Services
             return availableSlots;
         }
 
-        private async Task<bool> IsSlotFree(DayDTO daySchedule, DateTime slotStart, DateTime slotEnd)
+        private bool IsSlotFree(DayDTO daySchedule, DateTime slotStart, DateTime slotEnd)
         {
             bool isSlotBusy = daySchedule.BusySlots?.Any(busy => slotStart < busy.End && slotEnd > busy.Start) ?? false;
             return !isSlotBusy;
         }
 
-        private async Task<bool> ItsLunchtime(DateTime lunchStart, DateTime lunchEnd, DateTime slotStart)
+        private bool ItsLunchtime(DateTime lunchStart, DateTime lunchEnd, DateTime slotStart)
         {
             return slotStart.Hour >= lunchStart.Hour && slotStart.Hour < lunchEnd.Hour;
         }
 
-        private async Task<DateTime> ConvertToDateTime(DateOnly dateOnly, int hour)
+        private DateTime ConvertToDateTime(DateOnly dateOnly, int hour)
         {
             var time = new TimeOnly(hour, 0);
             return dateOnly.ToDateTime(time);

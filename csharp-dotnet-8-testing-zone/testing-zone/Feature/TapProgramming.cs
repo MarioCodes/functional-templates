@@ -17,7 +17,6 @@ namespace testingZone.Feature
 
         private readonly HttpClient _httpClient = new HttpClient();
         
-        // TODO: apuntar el uso de Enumerable
         List<string> _idsList = Enumerable.Range(1, 50)
             .Select(n => n.ToString())
             .ToList();

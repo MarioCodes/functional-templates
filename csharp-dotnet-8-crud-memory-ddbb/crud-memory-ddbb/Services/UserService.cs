@@ -13,7 +13,7 @@ namespace crud.Services
 
         private UserConfig _userConfig => userConfig.Value;
 
-        public async Task<string> GetRegex()
+        public string GetRegex()
         {
             return _userConfig.EmailRegex;
         }
@@ -22,12 +22,12 @@ namespace crud.Services
         {
             var newId = _dbContext.Users
                 .Select(x => x.Id).Max()+1;
-            User user = await MapRequestUserToUser(userModel, newId);
+            User user = MapRequestUserToUser(userModel, newId);
             _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return "user created";
         }
-        private async Task<User> MapRequestUserToUser(RequestUserModel requestUser, int id)
+        private User MapRequestUserToUser(RequestUserModel requestUser, int id)
         {
             return new User
             {
@@ -50,7 +50,7 @@ namespace crud.Services
         public async Task<ResponseListUserModel> GetUsers()
         {
             var users = _dbContext.Users.ToList();
-            List<ResponseUserModel> responseUsers = users.Select(user => MapUserToResponseUser(user))
+            List<ResponseUserModel> responseUsers = users.Select(MapUserToResponseUser)
                 .ToList();
 
             return new ResponseListUserModel
