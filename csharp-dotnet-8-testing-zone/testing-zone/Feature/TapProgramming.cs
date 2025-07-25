@@ -12,13 +12,11 @@ namespace testingZone.Feature
 {
     public class TapProgramming
     {
-        // TODO: apuntar por algun lado el uso de myfakeapi https://documenter.getpostman.com/view/5596891/SW7eyRFV?version=latest#d10a962e-a3de-4c0e-9fda-7d472c20ba24
         private const string URL = "https://myfakeapi.com/api/cars/";
         private const int PARALLEL_LIMIT = 10;
 
         private readonly HttpClient _httpClient = new HttpClient();
         
-        // TODO: apuntar el uso de Enumerable
         List<string> _idsList = Enumerable.Range(1, 50)
             .Select(n => n.ToString())
             .ToList();

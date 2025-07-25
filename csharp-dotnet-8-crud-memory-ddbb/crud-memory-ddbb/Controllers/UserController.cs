@@ -37,7 +37,7 @@ namespace crud.Controllers
 
             try
             {
-                var regex = await userService.GetRegex();
+                var regex = userService.GetRegex();
                 return Ok(regex);
             }
             catch (Exception ex)
