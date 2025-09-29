@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace testingZone.Feature
+﻿namespace general.Feature
 {
     public class PassByValueAndReference
     {

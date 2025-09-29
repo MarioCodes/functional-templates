@@ -1,4 +1,4 @@
-﻿namespace testingZone.Feature
+﻿namespace general.Feature
 {
     public class ReadonlyVsConst
     {

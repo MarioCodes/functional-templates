@@ -1,14 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using testingZone.Models;
+using general.Models;
 
-namespace testingZone.Feature
+namespace general.Feature
 {
     public class TapProgramming
     {
@@ -16,7 +11,7 @@ namespace testingZone.Feature
         private const int PARALLEL_LIMIT = 10;
 
         private readonly HttpClient _httpClient = new HttpClient();
-        
+
         List<string> _idsList = Enumerable.Range(1, 50)
             .Select(n => n.ToString())
             .ToList();
@@ -31,7 +26,7 @@ namespace testingZone.Feature
             Console.WriteLine($"task version contents '{JsonConvert.SerializeObject(task)}' \n");
             Console.WriteLine($"parallel version contents '{JsonConvert.SerializeObject(parallel)}'");
         }
-        
+
         // normal version - a task launched and awaited one at a time
         private async Task<List<CarResponse>> Control()
         {

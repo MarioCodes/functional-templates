@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace testingZone.Feature
+﻿namespace general.Feature
 {
     public class Nullables
     {
