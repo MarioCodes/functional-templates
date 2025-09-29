@@ -1,4 +1,4 @@
-﻿namespace testingZone.Models
+﻿namespace general.Models
 {
     public class CarResponse
     {
