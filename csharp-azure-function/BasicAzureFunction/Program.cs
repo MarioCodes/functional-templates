@@ -5,7 +5,9 @@ using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Net.Http.Headers;
+using BasicAzureFunction.Options;
 
 var builder = FunctionsApplication.CreateBuilder(args);
 
@@ -20,35 +22,28 @@ builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
     .ConfigureFunctionsApplicationInsights();
 
-// register HttpClient factory and configure online feeder client
-builder.Services.AddHttpClient("OnlineFeeder", (service, client) =>
-{
-    var config = service.GetRequiredService<IConfiguration>();
-    var logger = service.GetRequiredService<ILogger<Program>>();
-
-    string? url = config["ONLINE_FEEDER_URL"];
-    if (string.IsNullOrWhiteSpace(url))
+// configure custom options with validation on startup
+builder.Services
+    .AddOptions<OnlineFeederConf>()
+    .Configure<IConfiguration>((opts, cfg) =>
     {
-        var msg = "Required configuration 'ONLINE_FEEDER_URL' is missing or empty";
-        logger.LogError(msg);
-        throw new InvalidOperationException(msg);
-    }
+        opts.Url = cfg["ONLINE_FEEDER_URL"] ?? string.Empty;
+        opts.TimeoutSeconds = cfg.GetValue<int?>("ONLINE_FEEDER_TIMEOUT_SECONDS") ?? 60;
+    })
+    .Validate(o => !string.IsNullOrWhiteSpace(o.Url), "ONLINE_FEEDER_URL is required")
+    .Validate(o => Uri.TryCreate(o.Url, UriKind.Absolute, out _), "ONLINE_FEEDER_URL must be an absolute URL")
+    .Validate(o => o.TimeoutSeconds > 0, "ONLINE_FEEDER_TIMEOUT_SECONDS must be > 0")
+    .ValidateOnStart();
 
-    int timeoutSeconds = config.GetValue<int?>("ONLINE_FEEDER_TIMEOUT_SECONDS") ?? 60;
-    client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
-    client.BaseAddress = new Uri(url);
-});
-
-// register custom service which uses the previously configured HttpClient
-builder.Services.AddSingleton<IOnlineAnimalFeeder, OnlineAnimalFeeder>(service =>
-{
-    var config = service.GetRequiredService<IConfiguration>();
-    var logger = service.GetRequiredService<ILogger<OnlineAnimalFeeder>>();
-    
-    var httpClientFactory = service.GetRequiredService<IHttpClientFactory>();
-    var client = httpClientFactory.CreateClient("OnlineFeeder");
-    return new OnlineAnimalFeeder(logger, config, client);
-});
+// register typed HttpClient for IOnlineAnimalFeeder with handler settings
+builder.Services
+    .AddHttpClient<IOnlineAnimalFeeder, OnlineAnimalFeeder>((services, client) =>
+    {
+        var options = services.GetRequiredService<IOptions<OnlineFeederConf>>().Value;
+        client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
+        client.DefaultRequestHeaders.Accept.Clear();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    });
 
 // register custom services
 builder.Services

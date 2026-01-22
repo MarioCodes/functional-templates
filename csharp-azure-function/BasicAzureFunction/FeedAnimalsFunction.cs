@@ -12,7 +12,7 @@ public class FeedAnimalsFunction(ILogger<FeedAnimalsFunction> logger,
 {
 
     [Function("FeedAnimal")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "animal/{animal}/feed/{feedValue}")] HttpRequest req,
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "animal/{animal}/feed/{feedValue}")] HttpRequest req,
         string animal,
         string feedValue)
     {
