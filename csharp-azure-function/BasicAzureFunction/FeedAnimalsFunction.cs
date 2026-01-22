@@ -12,17 +12,15 @@ public class FeedAnimalsFunction(ILogger<FeedAnimalsFunction> logger,
 {
 
     [Function("FeedAnimal")]
-    public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "animal/{animal}/feed/{feedValue}")] HttpRequest req)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "animal/{animal}/feed/{feedValue}")] HttpRequest req,
+        string animal,
+        string feedValue)
     {
         logger.LogInformation("C# HTTP trigger function processed a request.");
+        logger.LogInformation($"Feeding {animal} with {feedValue}");
 
-        // read values from route
-        string animalStr = req.RouteValues["animal"]?.ToString() ?? "";
-        string feedValue = req.RouteValues["feedValue"]?.ToString() ?? "";
-        logger.LogInformation($"Feeding {animalStr} with {feedValue}");
-
-        Animal animal = new Animal();
-        if(!string.IsNullOrWhiteSpace(animalStr))
+        Animal animalModel = new Animal();
+        if(!string.IsNullOrWhiteSpace(animal))
         {
             // map somehow animal to its model
         }
@@ -36,7 +34,7 @@ public class FeedAnimalsFunction(ILogger<FeedAnimalsFunction> logger,
 
         try
         {
-            feeder.Feed(animal, feedValueInt);
+            await feeder.Feed(animalModel, feedValueInt);
         }
         catch (Exception ex)
         {
@@ -44,7 +42,7 @@ public class FeedAnimalsFunction(ILogger<FeedAnimalsFunction> logger,
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
-        return new OkObjectResult($"Animal {animalStr} has been fed with {feedValueInt} units.");
+        return new OkObjectResult($"Animal {animal} has been fed with {feedValueInt} units.");
     }
 
     private static bool TryInt(string? value, out int result)

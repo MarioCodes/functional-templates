@@ -39,7 +39,7 @@ builder.Services.AddHttpClient("OnlineFeeder", (service, client) =>
     client.BaseAddress = new Uri(url);
 });
 
-// register service which uses the previously configured HttpClient
+// register custom service which uses the previously configured HttpClient
 builder.Services.AddSingleton<IOnlineAnimalFeeder, OnlineAnimalFeeder>(service =>
 {
     var config = service.GetRequiredService<IConfiguration>();
