@@ -6,6 +6,8 @@ My own ready-to-code templates to start a project directly out of the box or to 
 * `multi-project` the best one for serious personal projects and interview challenges. this project includes: complete unit testing & coverlet usage *(to see code and branch coverage)*.
   * the main project to open is `Api.Core`
   * this is a template. don't try to run it, as important private info is missing from the repository
+* `azure-function`
+  * `BasicAzureFunction` basic isolated function which handles configuration for local dev and deployed as Azure Environment Variables. It includes an example for usage of an HttpClient
 
 ## Docker
 To update, as they are really old
