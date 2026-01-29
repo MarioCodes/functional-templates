@@ -25,10 +25,10 @@ builder.Services
 // configure custom options with validation on startup
 builder.Services
     .AddOptions<OnlineFeederConf>()
-    .Configure<IConfiguration>((opts, cfg) =>
+    .Configure<IConfiguration>((opts, conf) =>
     {
-        opts.Url = cfg["ONLINE_FEEDER_URL"] ?? string.Empty;
-        opts.TimeoutSeconds = cfg.GetValue<int?>("ONLINE_FEEDER_TIMEOUT_SECONDS") ?? 60;
+        opts.Url = conf["ONLINE_FEEDER_URL"] ?? throw new ArgumentNullException("ONLINE_FEEDER_URL");
+        opts.TimeoutSeconds = conf.GetValue<int?>("ONLINE_FEEDER_TIMEOUT_SECONDS") ?? 60;
     })
     .Validate(o => !string.IsNullOrWhiteSpace(o.Url), "ONLINE_FEEDER_URL is required")
     .Validate(o => Uri.TryCreate(o.Url, UriKind.Absolute, out _), "ONLINE_FEEDER_URL must be an absolute URL")
