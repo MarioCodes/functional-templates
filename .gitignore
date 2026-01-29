@@ -246,3 +246,9 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+csharp-azure-function/BasicAzureFunction/Properties/serviceDependencies.azfunction-poc-investigation-spain-dev-01 - One Deploy.json
+
+csharp-azure-function/BasicAzureFunction/Properties/ServiceDependencies/azfunction-poc-investigation-spain-dev-01 - One Deploy/appInsights1.arm.json
+
+csharp-azure-function/BasicAzureFunction/Properties/ServiceDependencies/azfunction-poc-investigation-spain-dev-01 - One Deploy/storage1.arm.json
