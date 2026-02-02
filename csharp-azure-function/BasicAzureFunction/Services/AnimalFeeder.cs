@@ -23,7 +23,7 @@ namespace BasicAzureFunction.Services
             }
 
             // Simulate feeding the animal - out of the scope of this template
-            logger.LogInformation("Feeding animal {Animal} with {Value} units.", animal.Name, value);
+            logger.LogInformation($"Feeding animal {animal.Name} with {value} units.");
         }
     }
 }
