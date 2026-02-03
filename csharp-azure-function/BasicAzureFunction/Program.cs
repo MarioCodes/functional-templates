@@ -27,7 +27,7 @@ builder.Services
     .AddOptions<OnlineFeederConf>()
     .Configure<IConfiguration>((opts, conf) =>
     {
-        opts.Url = conf["ONLINE_FEEDER_URL"] ?? throw new ArgumentNullException("ONLINE_FEEDER_URL");
+        opts.Url = conf["ONLINE_FEEDER_URL"] ?? "";
         opts.TimeoutSeconds = conf.GetValue<int?>("ONLINE_FEEDER_TIMEOUT_SECONDS") ?? 60;
     })
     .Validate(o => !string.IsNullOrWhiteSpace(o.Url), "ONLINE_FEEDER_URL is required")
