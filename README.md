@@ -8,9 +8,3 @@ My own ready-to-code templates to start a project directly out of the box or to 
   * this is a template. don't try to run it, as important private info is missing from the repository
 * `azure-function`
   * `BasicAzureFunction` basic isolated function which handles configuration for local dev and deployed as Azure Environment Variables. It includes an example for usage of an HttpClient
-
-## Docker
-To update, as they are really old
-
-## Kubernetes
-To update
