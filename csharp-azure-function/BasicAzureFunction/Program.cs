@@ -45,6 +45,9 @@ builder.Services
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     });
 
+// register health checks
+builder.Services.AddHealthChecks();
+
 // register custom services
 builder.Services
     .AddSingleton<IAnimalFeeder, AnimalFeeder>();
